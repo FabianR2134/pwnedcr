@@ -830,10 +830,14 @@ import Icon from './Icon.astro';
     .bento-stats { grid-column: span 2; }
   }
   @media (max-width: 560px) {
-    .bento-grid  { grid-template-columns: 1fr; }
+    .bento-grid  { grid-template-columns: 1fr; gap: 0.75rem; }
     .bento-large { grid-column: span 1; grid-row: span 1; }
     .bento-stats { grid-column: span 1; }
+    .bento-card  { padding: 1.25rem; }
     .bento-img-placeholder { aspect-ratio: 16/9; }
-    .stats-mini  { gap: 0.75rem; }
+    .stats-mini  { gap: 0.5rem; flex-wrap: wrap; }
+    .bento-card h3 { font-size: clamp(0.95rem, 4vw, 1.25rem); }
+    .bento-img-label { font-size: clamp(0.9rem, 4vw, 1.25rem); }
+    .tb-label    { width: clamp(3.5rem, 12vw, 5.5rem); font-size: 0.6rem; }
   }
 </style>
