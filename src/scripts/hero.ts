@@ -44,14 +44,14 @@
   }
 
   geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geo.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
+  geo.setAttribute('aColor',   new THREE.BufferAttribute(colors, 3));
 
   const mat = new THREE.ShaderMaterial({
     vertexShader: `
-      attribute vec3 color;
+      attribute vec3 aColor;
       varying vec3 vColor;
       void main() {
-        vColor = color;
+        vColor = aColor;
         vec4 mv = modelViewMatrix * vec4(position, 1.0);
         gl_PointSize = 3.5 * (280.0 / -mv.z);
         gl_Position = projectionMatrix * mv;
@@ -64,7 +64,7 @@
         float a = pow(1.0 - d * 2.0, 2.0);
         gl_FragColor = vec4(vColor, a * 0.85);
       }`,
-    transparent: true, depthWrite: false, vertexColors: true,
+    transparent: true, depthWrite: false,
   });
 
   const points = new THREE.Points(geo, mat);
