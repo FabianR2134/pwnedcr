@@ -1,0 +1,269 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { talleres } from '../data/talleres';
+---
+
+<Base
+  title="Talleres — PWNEDCR 0x9"
+  description="Talleres prácticos de hacking y ciberseguridad del PWNEDCR. La mayoría gratuitos."
+>
+  <Nav currentPage="/talleres" />
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="/">Inicio</a> <span>/</span> <span>Talleres</span>
+      </p>
+      <h1>Talleres</h1>
+      <p class="page-hero-sub">PWNEDCR 0x8 — 18 y 19 de Octubre 2025</p>
+      <p class="page-hero-note">
+        La mayoría de talleres son <strong>gratuitos</strong> con registro al evento.
+        Los que tienen costo lo indican explícitamente.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- Info box -->
+      <div class="info-box">
+        <h3>Preguntas frecuentes sobre talleres</h3>
+        <ul>
+          <li><strong>¿Son gratuitos?</strong> Sí, la mayoría. Los que tienen costo lo indican con su precio.</li>
+          <li><strong>¿Cómo me anoto?</strong> Algunos requieren registro previo (tienen link). Los demás son por orden de llegada.</li>
+          <li><strong>¿Necesito traer laptop?</strong> Sí, todos los talleres son 100% prácticos.</li>
+          <li><strong>¿Dónde pido ayuda?</strong> Canal <code>#Talleres-PWNED0x8</code> en el <a href="https://discord.gg/5vB8S7gQjc" target="_blank" rel="noopener noreferrer">Discord</a>.</li>
+        </ul>
+      </div>
+
+      <!-- Workshops list -->
+      <div class="workshops-list">
+        {talleres.map(t => (
+          <article class={`workshop-card${t.badge ? ' featured' : ''}`}>
+
+            {t.badge && (
+              <div class="workshop-badge">{t.badge} · {t.costo !== 'gratis' ? t.costo : 'Gratuito'}</div>
+            )}
+
+            <div class="workshop-header">
+              <div class="workshop-meta">
+                <span class="workshop-date">{t.fecha}</span>
+                {!t.badge && (
+                  t.costo === 'gratis'
+                    ? <span class="workshop-free">Gratuito</span>
+                    : <span class="workshop-paid">{t.costo}</span>
+                )}
+              </div>
+              <h2>{t.titulo}</h2>
+              <p class="workshop-instructor">
+                {t.instructores.length > 1 ? 'Instructores:' : 'Instructor:'}{' '}
+                <strong>{t.instructores.join(' · ')}</strong>
+              </p>
+            </div>
+
+            <p>{t.descripcion}</p>
+
+            {(t.detalles || t.requisitos) && (
+              <details>
+                <summary>Ver detalles y requisitos</summary>
+                <div class="workshop-details">
+                  {t.detalles?.map(d => (
+                    <div>
+                      <h4>{d.titulo}</h4>
+                      <ul>
+                        {d.items.map(item => <li>{item}</li>)}
+                      </ul>
+                    </div>
+                  ))}
+                  {t.requisitos.length > 0 && (
+                    <div>
+                      <h4>Requisitos</h4>
+                      <ul>
+                        {t.requisitos.map(r => <li>{r}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </details>
+            )}
+
+            {t.registroUrl && (
+              <a
+                href={t.registroUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary"
+              >
+                Registrarse — {t.costo}
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  /* Info box */
+  .info-box {
+    background: rgba(0,255,136,0.04);
+    border: 1px solid rgba(0,255,136,0.15);
+    border-radius: var(--r-lg);
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .info-box h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--green);
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+  }
+
+  .info-box ul { list-style: disc; padding-left: 1.25rem; }
+  .info-box li {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+    line-height: 1.6;
+  }
+  .info-box code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    background: var(--surface2);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+  }
+
+  /* Workshops */
+  .workshops-list { display: grid; gap: 1.5rem; }
+
+  .workshop-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .workshop-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+  }
+  .workshop-card.featured { border-color: rgba(0,255,136,0.3); }
+
+  .workshop-badge {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--green);
+    background: rgba(0,255,136,0.08);
+    border-radius: var(--r);
+    padding: 0.25rem 0.6rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .workshop-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .workshop-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--blue);
+  }
+
+  .workshop-free {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    background: rgba(0,255,136,0.08);
+    color: var(--green);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+  }
+
+  .workshop-paid {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    background: rgba(255,215,0,0.08);
+    color: var(--yellow);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+  }
+
+  .workshop-header h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 0.4rem;
+  }
+
+  .workshop-instructor {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+
+  .workshop-card > p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 1rem 0;
+  }
+
+  /* Details/summary */
+  details { margin: 0.5rem 0 1rem; }
+
+  details summary {
+    font-size: 0.8rem;
+    color: var(--green);
+    font-family: var(--font-mono);
+    padding: 0.4rem 0;
+    user-select: none;
+    list-style: none;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::before { content: '+ '; }
+  details[open] summary::before { content: '- '; }
+  details summary:hover { text-decoration: underline; }
+
+  .workshop-details {
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface2);
+    border-radius: var(--r);
+    border-left: 2px solid var(--green);
+  }
+
+  .workshop-details h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin: 1rem 0 0.5rem;
+    font-family: var(--font-mono);
+  }
+  .workshop-details h4:first-child { margin-top: 0; }
+
+  .workshop-details ul { list-style: disc; padding-left: 1.25rem; }
+  .workshop-details li {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+    line-height: 1.5;
+  }
+</style>

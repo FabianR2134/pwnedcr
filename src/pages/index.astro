@@ -1,0 +1,954 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import BentoGrid from '../components/BentoGrid.astro';
+import StoryScroll from '../components/StoryScroll.astro';
+import Menu3D from '../components/Menu3D.astro';
+import Footer from '../components/Footer.astro';
+import { sponsorTiers } from '../data/sponsors';
+import { charlas } from '../data/charlas';
+
+const featured = charlas.slice(0, 6);
+---
+
+<Base title="PWNEDCR 0x9 — La conferencia de hacking de Costa Rica">
+  <Nav currentPage="/" />
+  <Hero />
+
+  <!-- ═══════════════════════════════════════════
+       ACTO 1.5: Journey — scroll horizontal narrativo
+  ════════════════════════════════════════════ -->
+  <StoryScroll />
+
+  <!-- ═══════════════════════════════════════════
+       ACTO 2: Números que cuentan la historia
+  ════════════════════════════════════════════ -->
+  <section class="section stats-section" id="stats-section">
+    <!-- Artefacto 3D flotante de fondo -->
+    <canvas id="stats-canvas" class="stats-bg-canvas" aria-hidden="true"></canvas>
+    <div class="container">
+      <p class="section-eyebrow">8 años construyendo comunidad</p>
+      <div class="stats-grid">
+        <div class="stat-card" data-count="8" data-suffix="ª">
+          <span class="stat-number" id="cnt-ediciones">0</span>
+          <span class="stat-suffix">ª</span>
+          <p class="stat-label">Edición</p>
+          <p class="stat-desc">Desde 2017, sin parar</p>
+        </div>
+        <div class="stat-card" data-count="500" data-suffix="+">
+          <span class="stat-number" id="cnt-asistentes">0</span>
+          <span class="stat-suffix">+</span>
+          <p class="stat-label">Asistentes</p>
+          <p class="stat-desc">Profesionales & estudiantes</p>
+        </div>
+        <div class="stat-card" data-count="28" data-suffix="">
+          <span class="stat-number" id="cnt-charlas">0</span>
+          <span class="stat-suffix"></span>
+          <p class="stat-label">Charlas</p>
+          <p class="stat-desc">Red, Blue, AI, Hardware</p>
+        </div>
+        <div class="stat-card" data-count="8" data-suffix="">
+          <span class="stat-number" id="cnt-talleres">0</span>
+          <span class="stat-suffix"></span>
+          <p class="stat-label">Talleres</p>
+          <p class="stat-desc">Hands-on, la mayoría gratis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       ACTO 3: Manifesto — texto de impacto
+  ════════════════════════════════════════════ -->
+  <section class="manifesto-section" id="manifesto">
+    <div class="manifesto-inner">
+      <p class="manifesto-tag">// manifesto</p>
+      <h2 class="manifesto-text">
+        <span class="mw accent-cyan" data-speed="1">PWNEDCR</span>
+        <span class="mw" data-speed="0">Menos etiquetas,</span>
+        <span class="mw" data-speed="2">más exploits. La comunidad que</span>
+        <span class="mw accent-magenta" data-speed="1">hackea</span>
+        <span class="mw" data-speed="0">el sistema.</span>
+      </h2>
+      <p class="manifesto-sub">
+        Cinco años de comunidad. Ocho ediciones. Cientos de personas que encontraron
+        su tribu aquí. PWNEDCR 0x9 es para vos.
+      </p>
+    </div>
+    <div class="manifesto-bg-text" aria-hidden="true">HACK</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       ACTO 4: BentoGrid — ¿Qué hay?
+  ════════════════════════════════════════════ -->
+  <BentoGrid />
+
+  <!-- ═══════════════════════════════════════════
+       ACTO 5: Charlas preview — scroll horizontal
+  ════════════════════════════════════════════ -->
+  <section class="section talks-preview-section" id="talks-preview">
+    <div class="container">
+      <p class="section-eyebrow">Esto te espera</p>
+      <div class="talks-header">
+        <h2 class="section-title">Charlas destacadas</h2>
+        <a href="/charlas" class="btn-secondary">Ver las 28 charlas →</a>
+      </div>
+    </div>
+    <div class="talks-scroll-wrapper" id="talks-scroll">
+      <div class="talks-track" id="talks-track">
+        {featured.map((c, i) => (
+          <div class="talk-card" style={`--i:${i}`}>
+            <div class="talk-card-header">
+              <span class={`tag tag-${c.tagColor}`}>{c.tag}</span>
+              <span class="talk-index">0{i + 1}</span>
+            </div>
+            <h3 class="talk-title">{c.titulo}</h3>
+            <div class="talk-speakers">
+              {c.speakers.map(s => (
+                <span class="talk-speaker">{s}</span>
+              ))}
+            </div>
+            <p class="talk-desc">{c.descripcion}</p>
+          </div>
+        ))}
+        <div class="talk-card talk-card-cta">
+          <p class="cta-label">¿Querés ver más?</p>
+          <h3>+22 charlas más</h3>
+          <a href="/charlas" class="btn-primary" style="margin-top:1rem">Ver programa completo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       ACTO 5.5: Navegación 3D interactiva
+  ════════════════════════════════════════════ -->
+  <Menu3D />
+
+  <!-- ═══════════════════════════════════════════
+       ACTO 6: Pin section — "¿Estás listo?"
+  ════════════════════════════════════════════ -->
+  <section class="pin-cta-section" id="pin-cta">
+    <div class="pin-cta-inner">
+      <div class="pin-scanlines" aria-hidden="true"></div>
+      <p class="pin-eyebrow">// evento</p>
+      <h2 class="pin-title">
+        <span id="pin-line1">PWNEDCR</span>
+        <span id="pin-line2" class="pin-accent">0x9</span>
+      </h2>
+      <div class="pin-details">
+        <div class="pin-detail">
+          <span class="pin-detail-label">Fecha</span>
+          <span class="pin-detail-val">Mayo 2025</span>
+        </div>
+        <div class="pin-sep"></div>
+        <div class="pin-detail">
+          <span class="pin-detail-label">Lugar</span>
+          <span class="pin-detail-val">Auditorio Nacional · San José, CR</span>
+        </div>
+        <div class="pin-sep"></div>
+        <div class="pin-detail">
+          <span class="pin-detail-label">Entrada</span>
+          <span class="pin-detail-val" style="color:var(--green)">Gratis</span>
+        </div>
+      </div>
+      <div class="pin-actions">
+        <a
+          href="https://forms.gle/M363ojNzQpAmw2yH8"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary"
+        >Registrarme ahora</a>
+        <a href="/charlas" class="btn-secondary">Ver programa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       ACTO 7: Sponsors
+  ════════════════════════════════════════════ -->
+  <section class="section sponsors-section">
+    <div class="container">
+      <p class="section-eyebrow">Empresas que creen en esto</p>
+      <h2 class="section-title">Patrocinadores 2025</h2>
+
+      {sponsorTiers.map(({ tier, sponsors }) => (
+        <div class="sponsor-tier-block">
+          <h3 class="tier-label">{tier}</h3>
+          <div class={`sponsor-row sponsor-${tier.toLowerCase()}`}>
+            {sponsors.map(s => (
+              <a href={s.url} target="_blank" rel="noopener noreferrer" title={s.nombre}>
+                <img src={s.logo} alt={s.alt} loading="lazy" />
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="sponsor-cta">
+        <a
+          href="https://forms.gle/M363ojNzQpAmw2yH8"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-secondary"
+        >Convertirse en sponsor →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       ACTO 8: Newsletter
+  ════════════════════════════════════════════ -->
+  <section class="section newsletter-section">
+    <div class="container newsletter-inner">
+      <p class="section-eyebrow">Mantenete al día</p>
+      <h2>¿No te querés perder el PWNEDCR 0x9?</h2>
+      <p>Dejanos tu correo y te avisamos cuando abran los registros.</p>
+      <form class="newsletter-form" id="newsletter-form" novalidate>
+        <input
+          type="email"
+          name="email"
+          placeholder="tu@correo.com"
+          required
+          autocomplete="email"
+          aria-label="Tu correo electrónico"
+        />
+        <button type="submit" class="btn-primary">Notificarme</button>
+      </form>
+      <p class="newsletter-micro">Sin spam. Solo te avisamos cuando abran registros.</p>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  import * as THREE from 'three';
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── 3D Stats background artifact ──────────────────────────── */
+  (() => {
+    const canvas = document.getElementById('stats-canvas') as HTMLCanvasElement | null;
+    if (!canvas) return;
+
+    const w = window.innerWidth;
+    const h = 320;
+    canvas.width  = w;
+    canvas.height = h;
+
+    const scene    = new THREE.Scene();
+    const camera   = new THREE.PerspectiveCamera(50, w / h, 0.1, 50);
+    camera.position.z = 7;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setSize(w, h);
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+
+    // Gran icosaedro wireframe centrado
+    const icoGeo = new THREE.IcosahedronGeometry(2.5, 1);
+    const icoMat = new THREE.MeshBasicMaterial({
+      color: 0x00e5ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.06,
+    });
+    const ico = new THREE.Mesh(icoGeo, icoMat);
+    scene.add(ico);
+
+    // Anillo orbital
+    const torusGeo = new THREE.TorusGeometry(3.5, 0.012, 4, 80);
+    const torusMat = new THREE.MeshBasicMaterial({ color: 0xe91e8c, transparent: true, opacity: 0.07 });
+    const torus    = new THREE.Mesh(torusGeo, torusMat);
+    torus.rotation.x = Math.PI / 2.5;
+    scene.add(torus);
+
+    // Partículas de fondo
+    const pCount = 120;
+    const pPos   = new Float32Array(pCount * 3);
+    for (let i = 0; i < pCount * 3; i++) pPos[i] = (Math.random() - 0.5) * 20;
+    const pGeo = new THREE.BufferGeometry();
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+    scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x00e5ff, size: 0.025, transparent: true, opacity: 0.2 })));
+
+    let visible = false;
+    const obs = new IntersectionObserver((entries) => {
+      visible = entries[0].isIntersecting;
+    }, { threshold: 0.1 });
+    obs.observe(canvas);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      if (!visible) return;
+      const t = performance.now() * 0.0004;
+      ico.rotation.x   = t * 0.5;
+      ico.rotation.y   = t;
+      torus.rotation.z = t * 0.7;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Scroll parallax: inclinar con el scroll
+    ScrollTrigger.create({
+      trigger: '#stats-section',
+      start: 'top bottom',
+      end: 'bottom top',
+      onUpdate(self) {
+        ico.rotation.z = self.progress * Math.PI;
+        (icoMat as THREE.MeshBasicMaterial).opacity = 0.04 + self.progress * 0.06;
+      },
+    });
+  })();
+
+  /* ── Newsletter ── */
+  const form = document.getElementById('newsletter-form') as HTMLFormElement;
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = (form.querySelector('input[type="email"]') as HTMLInputElement).value;
+      alert(`¡Gracias! Te avisaremos en ${email} cuando abran los registros para el PWNEDCR 0x9.`);
+      form.reset();
+    });
+  }
+
+  /* ── Animated counters ── */
+  function animateCounter(el: HTMLElement, target: number, duration = 1.5) {
+    gsap.to({ val: 0 }, {
+      val: target,
+      duration,
+      ease: 'power2.out',
+      onUpdate() {
+        el.textContent = Math.round((this as any).targets()[0].val).toString();
+      },
+    });
+  }
+
+  ScrollTrigger.create({
+    trigger: '#stats-section',
+    start: 'top 70%',
+    once: true,
+    onEnter() {
+      animateCounter(document.getElementById('cnt-ediciones')!, 8, 1.2);
+      animateCounter(document.getElementById('cnt-asistentes')!, 500, 2);
+      animateCounter(document.getElementById('cnt-charlas')!, 28, 1.5);
+      animateCounter(document.getElementById('cnt-talleres')!, 8, 1.2);
+    },
+  });
+
+  /* stat cards stagger */
+  gsap.from('.stat-card', {
+    scrollTrigger: { trigger: '#stats-section', start: 'top 75%' },
+    opacity: 0,
+    y: 50,
+    stagger: 0.1,
+    duration: 0.7,
+    ease: 'power2.out',
+  });
+
+  /* ── Manifesto word reveals ── */
+  gsap.utils.toArray<HTMLElement>('.mw').forEach((word) => {
+    const speed = parseFloat(word.dataset.speed || '0');
+    gsap.from(word, {
+      scrollTrigger: {
+        trigger: '#manifesto',
+        start: 'top 80%',
+        end: 'center center',
+        scrub: 0.5 + speed * 0.3,
+      },
+      opacity: 0,
+      y: 40 + speed * 20,
+      ease: 'none',
+    });
+  });
+
+  gsap.from('.manifesto-sub', {
+    scrollTrigger: { trigger: '#manifesto', start: 'top 60%' },
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    delay: 0.3,
+  });
+
+  /* big bg text parallax */
+  gsap.to('.manifesto-bg-text', {
+    scrollTrigger: {
+      trigger: '#manifesto',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 1,
+    },
+    x: '15%',
+    ease: 'none',
+  });
+
+  /* ── Horizontal talks scroll ── */
+  const track = document.getElementById('talks-track');
+  if (track) {
+    const wrapper = document.getElementById('talks-scroll')!;
+    const cards = track.querySelectorAll<HTMLElement>('.talk-card');
+    const totalScroll = track.scrollWidth - wrapper.clientWidth;
+
+    gsap.to(track, {
+      x: -totalScroll,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#talks-preview',
+        start: 'top top',
+        end: `+=${totalScroll}`,
+        pin: true,
+        scrub: 1,
+        anticipatePin: 1,
+      },
+    });
+
+    /* individual card entrance */
+    cards.forEach((card, i) => {
+      gsap.from(card, {
+        opacity: 0,
+        scale: 0.92,
+        duration: 0.5,
+        delay: i * 0.04,
+        scrollTrigger: {
+          trigger: '#talks-preview',
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      });
+    });
+  }
+
+  /* ── Pin CTA section ── */
+  gsap.from('#pin-line1', {
+    scrollTrigger: { trigger: '#pin-cta', start: 'top 70%' },
+    opacity: 0,
+    x: -60,
+    duration: 0.8,
+    ease: 'power3.out',
+  });
+  gsap.from('#pin-line2', {
+    scrollTrigger: { trigger: '#pin-cta', start: 'top 70%' },
+    opacity: 0,
+    x: 60,
+    duration: 0.8,
+    delay: 0.1,
+    ease: 'power3.out',
+  });
+  gsap.from('.pin-detail', {
+    scrollTrigger: { trigger: '#pin-cta', start: 'top 60%' },
+    opacity: 0,
+    y: 20,
+    stagger: 0.12,
+    duration: 0.6,
+    delay: 0.3,
+  });
+  gsap.from('.pin-actions', {
+    scrollTrigger: { trigger: '#pin-cta', start: 'top 55%' },
+    opacity: 0,
+    y: 20,
+    duration: 0.6,
+    delay: 0.6,
+  });
+
+  /* ── Sponsors reveal ── */
+  gsap.from('.sponsor-tier-block', {
+    scrollTrigger: { trigger: '.sponsors-section', start: 'top 80%' },
+    opacity: 0,
+    y: 30,
+    stagger: 0.15,
+    duration: 0.6,
+  });
+</script>
+
+<style>
+  /* ── Stats section ── */
+  .stats-section {
+    background: var(--bg-mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stats-bg-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  .stats-section .container { position: relative; z-index: 2; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    margin-top: 2.5rem;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .stat-card:hover { background: var(--surface2); }
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 40px; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .stat-card:hover::after { opacity: 1; }
+
+  .stat-number {
+    font-family: var(--font-mono);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: var(--cyan);
+    line-height: 1;
+    display: inline;
+  }
+
+  .stat-suffix {
+    font-family: var(--font-mono);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--magenta);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ── Manifesto ── */
+  .manifesto-section {
+    position: relative;
+    padding: 8rem 0;
+    overflow: hidden;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .manifesto-inner {
+    position: relative;
+    z-index: 2;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .manifesto-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--cyan);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .manifesto-text {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3em;
+    margin-bottom: 2.5rem;
+  }
+
+  .mw { display: inline-block; }
+  .accent-cyan    { color: var(--cyan); }
+  .accent-magenta { color: var(--magenta); }
+
+  .manifesto-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.8;
+    position: relative;
+    z-index: 2;
+  }
+
+  .manifesto-bg-text {
+    position: absolute;
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-size: clamp(10rem, 25vw, 22rem);
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(0,229,255,0.05);
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+    z-index: 1;
+  }
+
+  /* ── Talks preview ── */
+  .talks-preview-section {
+    background: var(--bg-mid);
+    border-top: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+
+  .talks-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .talks-scroll-wrapper {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 4rem;
+  }
+  .talks-scroll-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 100%;
+    background: linear-gradient(to left, var(--bg-mid), transparent);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .talks-track {
+    display: flex;
+    gap: 1.25rem;
+    padding: 0 1.5rem;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .talk-card {
+    width: 320px;
+    flex-shrink: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .talk-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .talk-card:hover { border-color: var(--border-hover); }
+  .talk-card:hover::before { opacity: 1; }
+
+  .talk-card-cta {
+    background: linear-gradient(135deg, var(--surface2) 0%, rgba(124,58,237,0.1) 100%);
+    border-color: rgba(124,58,237,0.3);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .cta-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .talk-card-cta h3 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -1px;
+  }
+
+  .talk-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .talk-index {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+  }
+
+  .talk-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+  }
+
+  .talk-speakers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .talk-speaker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--cyan);
+  }
+  .talk-speaker + .talk-speaker::before { content: '& '; color: var(--muted); }
+
+  .talk-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-top: auto;
+  }
+
+  /* ── Pin CTA ── */
+  .pin-cta-section {
+    position: relative;
+    padding: 8rem 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .pin-scanlines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,229,255,0.015) 3px,
+      rgba(0,229,255,0.015) 4px
+    );
+    pointer-events: none;
+  }
+
+  .pin-cta-inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+  }
+
+  .pin-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--cyan);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .pin-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4em;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 900;
+    letter-spacing: -4px;
+    line-height: 0.9;
+    color: #fff;
+    margin-bottom: 3rem;
+  }
+
+  .pin-accent {
+    color: transparent;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .pin-details {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+
+  .pin-sep {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+  }
+
+  .pin-detail-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.3rem;
+  }
+
+  .pin-detail-val {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .pin-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ── Sponsors ── */
+  .sponsors-section { background: var(--bg); }
+
+  .sponsor-tier-block { margin-bottom: 2.5rem; }
+
+  .tier-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sponsor-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .sponsor-row a {
+    display: flex;
+    align-items: center;
+    opacity: 0.6;
+    filter: grayscale(1) brightness(1.5);
+    transition: opacity 0.25s, filter 0.25s;
+  }
+  .sponsor-row a:hover { opacity: 1; filter: none; }
+
+  .sponsor-diamond img { height: 48px; }
+  .sponsor-gold    img { height: 40px; }
+  .sponsor-silver  img { height: 32px; }
+  .sponsor-bronce  img { height: 26px; }
+
+  .sponsor-cta { margin-top: 3rem; }
+
+  /* ── Newsletter ── */
+  .newsletter-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .newsletter-inner {
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .newsletter-inner h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3vw, 1.875rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+  }
+
+  .newsletter-inner > p { color: var(--muted); margin-bottom: 1.5rem; }
+
+  .newsletter-form {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 420px;
+    margin: 0 auto 0.75rem;
+  }
+
+  .newsletter-form input[type="email"] {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-size: 0.875rem;
+    font-family: var(--font-body);
+    transition: border-color 0.2s;
+  }
+  .newsletter-form input::placeholder { color: var(--muted); }
+  .newsletter-form input:focus { outline: none; border-color: var(--cyan); }
+
+  .newsletter-micro {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .talks-header { flex-direction: column; align-items: flex-start; }
+    .pin-sep { display: none; }
+    .pin-details { flex-direction: column; gap: 1rem; }
+  }
+
+  @media (max-width: 480px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stat-card { padding: 1.5rem 1rem; }
+    .newsletter-form { flex-direction: column; }
+  }
+</style>

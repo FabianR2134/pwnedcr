@@ -1,0 +1,208 @@
+export type TagColor = 'red' | 'blue' | 'yellow' | 'orange' | 'cyan' | 'green' | 'teal' | 'muted';
+
+export interface Charla {
+  titulo: string;
+  speakers: string[];
+  descripcion: string;
+  tag: string;
+  tagColor: TagColor;
+}
+
+export const charlas: Charla[] = [
+  {
+    titulo: "Impacto de Ciberseguridad y cómo transformamos el riesgo en oportunidad",
+    speakers: ["Daniel Chaves", "José Pacheco", "Jose Slon", "Yoel Apu", "Yennifer Rivera"],
+    descripcion: "Este panel reúne a líderes en ciberseguridad para explorar la evolución de la postura en seguridad a través de diferentes retos. Pasando de una gestión reactiva de vulnerabilidades a un enfoque proactivo.",
+    tag: "Panel",
+    tagColor: "green",
+  },
+  {
+    titulo: "APIs: Las puertas invisibles que olvidaste cerrar",
+    speakers: ["Ericka Ramirez Quesada", "Sebastian Velez Forero"],
+    descripcion: "En un mundo donde más del 80% del tráfico en línea se transmite a través de APIs, proteger estas puertas invisibles es una prioridad crítica. Se revisan las amenazas del OWASP API Security Top 10 y herramientas como API Gateways.",
+    tag: "AppSec",
+    tagColor: "red",
+  },
+  {
+    titulo: "Cómo enfrentar malware fileless desde un centro de operaciones MDR",
+    speakers: ["Emiliano Ipar"],
+    descripcion: "Técnicas reales que usan los atacantes para ejecutar y persistir sin dejar archivos en disco, y cómo un Centro MDR usa telemetría para investigar, contener y cazar estas amenazas.",
+    tag: "Blue Team",
+    tagColor: "blue",
+  },
+  {
+    titulo: "Pentest Mobile 101: Del APK al Backend",
+    speakers: ["Elzer Pineda"],
+    descripcion: "Flujo completo de un pentest a una aplicación móvil: decompilación de APK, bypass de SSL pinning y root detection, y explotación de vulnerabilidades críticas en el backend. Caso real en app financiera panameña.",
+    tag: "Mobile",
+    tagColor: "orange",
+  },
+  {
+    titulo: "Del pwn al pay: el verdadero costo de una brecha",
+    speakers: ["Aldo González Miranda"],
+    descripcion: "Una brecha no solo compromete sistemas; compromete el negocio. Se descompone el costo total desde lo técnico hasta lo humano: downtime, burnout, rotación, pérdidas por minuto e impacto reputacional.",
+    tag: "Negocio",
+    tagColor: "muted",
+  },
+  {
+    titulo: "Adversarial Malware: Payloads Auto-Mutables con GANs y Reinforcement Learning",
+    speakers: ["Alexander Botero"],
+    descripcion: "Cómo las redes generativas adversariales (GANs) y el aprendizaje por refuerzo (RL) pueden transformar un payload en miles de variantes únicas, adaptativas y evasivas sin intervención humana.",
+    tag: "IA · Ofensivo",
+    tagColor: "yellow",
+  },
+  {
+    titulo: "Red Teaming sobre el aire: Acceso inicial en redes Wi-Fi empresariales",
+    speakers: ["Gerardo Mejia", "Nora Guevara"],
+    descripcion: "Cómo el acceso inicial en redes corporativas puede lograrse a través de técnicas ofensivas Wi-Fi, incluyendo WPA2/WPA3-Enterprise con PEAP, portales cautivos y su integración en operaciones Red Team.",
+    tag: "Red Team · Wi-Fi",
+    tagColor: "red",
+  },
+  {
+    titulo: "From introspection to exploitation, destroying GraphQL",
+    speakers: ["Juan Carlos Campos (y1s4s)"],
+    descripcion: "Técnicas de ataque, elusiones y abusos en APIs GraphQL: enumeración, mutations abuse, broken access control, aliases abuse y nested queries que pueden causar DoS o breach masivo de datos.",
+    tag: "AppSec",
+    tagColor: "red",
+  },
+  {
+    titulo: "Glitching Hardware: Fault and Voltage Attacks",
+    speakers: ["Kevin Jahaziel Leon"],
+    descripcion: "Ataques por inyección de fallos y voltage glitching: cómo alterar el comportamiento de microcontroladores, bypass de protecciones de lectura, y casos reales como el nRF52832 saltando el APPROTECT.",
+    tag: "Hardware",
+    tagColor: "orange",
+  },
+  {
+    titulo: "IBM Quantum Safe",
+    speakers: ["Emmanuel Villegas"],
+    descripcion: "Tecnologías de IBM para proteger datos contra futuros ataques cuánticos. Cómo las computadoras cuánticas podrían descifrar RSA y ECC, y la hoja de ruta para migrar a criptografía post-cuántica.",
+    tag: "Criptografía",
+    tagColor: "cyan",
+  },
+  {
+    titulo: "PwnSat: Satélites vulnerables por diseño para hackear el espacio",
+    speakers: ["Romel Marin Cordoba"],
+    descripcion: "Presentación de PwnSat, un satélite físico vulnerable open source diseñado para enseñar hacking espacial: interceptación de telemetría, análisis de tramas, manipulación de enlaces y explotación de estaciones terrestres.",
+    tag: "Espacial · Hardware",
+    tagColor: "orange",
+  },
+  {
+    titulo: "Cuando el pentest falla… pero la seguridad gana",
+    speakers: ["Eduardo Snape"],
+    descripcion: "Cómo transformar reportes de pentest técnicos en lenguaje ejecutivo: priorizar vulnerabilidades según impacto de negocio, métricas accionables y cómo lograr que los hallazgos impulsen decisiones reales.",
+    tag: "Gestión",
+    tagColor: "muted",
+  },
+  {
+    titulo: "Red Route: Silent Red Team Techniques for Full AD Takeover",
+    speakers: ["Omar Palomino"],
+    descripcion: "Rutas de ataque más peligrosas en redes Windows: delegaciones inseguras, ACLs, DCSync, Golden Tickets, MSSQL Linked Servers y movimiento lateral para comprometer Active Directory.",
+    tag: "Active Directory",
+    tagColor: "red",
+  },
+  {
+    titulo: "C2 Asincrónico",
+    speakers: ["Victor David Casares"],
+    descripcion: "Desarrollo de un C2 creado para evadir XDRs en entornos altamente restrictivos (solo permisos de Domain User, sin PowerShell, CMD ni intérpretes) y cómo lograr que el binario pueda \"mutar\".",
+    tag: "Ofensivo",
+    tagColor: "red",
+  },
+  {
+    titulo: "MCP Security & Agentic LLMs",
+    speakers: ["Cristian Rodriguez"],
+    descripcion: "Seguridad del Model Context Protocol (MCP) de Anthropic y cómo proteger aplicaciones LLM usando OAuth 2.1 para autenticación y autorización en sistemas agénticos.",
+    tag: "IA · LLMs",
+    tagColor: "yellow",
+  },
+  {
+    titulo: "Ciberseguridad desde Cero: Tu Hoja de Ruta",
+    speakers: ["JD Delgado Cascante"],
+    descripcion: "Guía práctica para iniciar una carrera en ciberseguridad: roles disponibles (SOC, consultor, forense, etc.), recursos educativos, plataformas CTF y certificaciones recomendadas para principiantes.",
+    tag: "Principiantes",
+    tagColor: "teal",
+  },
+  {
+    titulo: "Haciéndole Hacking al Estereotipo",
+    speakers: ["Yennifer Rivera"],
+    descripcion: "Historia personal como pentester: rompiendo barreras de quién \"debería\" estar en ciberseguridad, primeros pasos reales, vulnerabilidades que enseñan y cómo la curiosidad es el mejor aliado.",
+    tag: "Comunidad",
+    tagColor: "green",
+  },
+  {
+    titulo: "Building AI/LLM Pentesting Capabilities: A Leadership Perspective",
+    speakers: ["Yoel Apu"],
+    descripcion: "Proceso de liderazgo para construir capacidades de pentesting en IA/LLM desde cero: alineación de equipos, OWASP Top 10 para LLMs, gestión de riesgos desconocidos y cultura de hacking responsable.",
+    tag: "IA · Liderazgo",
+    tagColor: "yellow",
+  },
+  {
+    titulo: "ICS-SCADA bajo la lupa: seguridad industrial y amenazas persistentes avanzadas",
+    speakers: ["Damian Herrera"],
+    descripcion: "Fundamentos de seguridad en ICS/SCADA, análisis de ataques históricos y actuales contra infraestructuras críticas, y estrategias de defensa en profundidad para entornos industriales.",
+    tag: "ICS · OT",
+    tagColor: "cyan",
+  },
+  {
+    titulo: "¿Cómo ser Top 10 Mundial en el CTF Business de HTB?",
+    speakers: ["Simon Correa"],
+    descripcion: "Cómo Fluid Attacks se convirtió en la primera empresa colombiana en alcanzar el TOP 10 mundial del HTB Business CTF 2025: estrategias, técnicas y metodología replicable para Latinoamérica.",
+    tag: "CTF",
+    tagColor: "green",
+  },
+  {
+    titulo: "SATO: On-premise to cloud Attacks (Secure Azure Token Operations)",
+    speakers: ["Edrian Miranda"],
+    descripcion: "Herramienta ofensiva para extraer y descifrar tokens en entornos Azure: archivos .TBRES, caché MSAL con DPAPI, compromiso de identidades híbridas con Entra Connect y perspectiva defensiva.",
+    tag: "Cloud · Azure",
+    tagColor: "cyan",
+  },
+  {
+    titulo: "Ciberseguridad aeroespacial y biomédica en órbita crítica",
+    speakers: ["Luciana Herrera Vargas"],
+    descripcion: "Casos reales de ciberataques en tecnologías críticas: hackeo al satélite ROSAT, control remoto de bombas de insulina Medtronic, marcapasos sin autenticación y la importancia del security by design.",
+    tag: "Espacial · Biomédica",
+    tagColor: "orange",
+  },
+  {
+    titulo: "The Enemy Within: Incident Response for Insider Threats",
+    speakers: ["Helmer Josue Méndez Duarte"],
+    descripcion: "Cómo adaptar el proceso de respuesta a incidentes cuando el atacante ya está dentro: tipos de amenazas internas (espionaje, sabotaje, negligencia), indicadores técnicos de detección y estrategias de mitigación.",
+    tag: "Blue Team · IR",
+    tagColor: "blue",
+  },
+  {
+    titulo: "No era hacker... hasta que lo fui",
+    speakers: ["Esteban Araya"],
+    descripcion: "Historia honesta de cómo entrar a ciberseguridad desde cero sin perfil técnico tradicional: errores reales, rutas que funcionaron, pentests, PAM, contratos públicos e infraestructura segura.",
+    tag: "Comunidad",
+    tagColor: "green",
+  },
+  {
+    titulo: "From Prompt to Pwn: Un viaje por el OWASP Top 10 para LLMs",
+    speakers: ["Randy Varela"],
+    descripcion: "Recorrido práctico por el OWASP Top 10 para LLMs: prompt injection, data leakage, model denial y técnicas ofensivas/defensivas con demostraciones reales en entornos empresariales.",
+    tag: "IA · LLMs",
+    tagColor: "yellow",
+  },
+  {
+    titulo: "Los 10 más buscados en Kubernetes: evaluando vulnerabilidades en los cluster",
+    speakers: ["Andrés Arias Campos"],
+    descripcion: "OWASP Top 10 para Kubernetes: origen de vulnerabilidades comunes, recomendaciones prácticas y explotación controlada de dos de ellas para demostrar su impacto real en producción.",
+    tag: "Cloud · K8s",
+    tagColor: "cyan",
+  },
+  {
+    titulo: "CTI VS CTH! Reactive VS Proactive! Which is better?!",
+    speakers: ["Cesar Alberto Freer Acevedo"],
+    descripcion: "Diferencia entre Threat Intelligence (reactivo) y Threat Hunting (proactivo): mecanismos, herramientas y cuándo usar cada enfoque para la ciberdefensa empresarial.",
+    tag: "Blue Team",
+    tagColor: "blue",
+  },
+  {
+    titulo: "El uso de la Inteligencia Artificial en la Ingeniería Social",
+    speakers: ["Francisco Villalobos"],
+    descripcion: "Cómo la IA revoluciona la ingeniería social: geolocalización desde fotos, clonación de voz, perfiles automáticos, personas falsas y rastreo de comportamiento — todo ya ocurriendo hoy.",
+    tag: "IA · OSINT",
+    tagColor: "yellow",
+  },
+];

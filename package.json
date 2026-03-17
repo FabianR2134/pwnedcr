@@ -1,0 +1,23 @@
+{
+  "name": "d-demopwnedcr",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^6.0.5",
+    "gsap": "^3.14.2",
+    "lenis": "^1.3.18",
+    "tailwindcss": "^4.2.1",
+    "three": "^0.183.2"
+  }
+}

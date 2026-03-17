@@ -1,0 +1,881 @@
+---
+import Icon from './Icon.astro';
+---
+
+<section class="section bento-section">
+  <div class="container">
+    <p class="bento-eyebrow">¿Por qué asistir?</p>
+    <h2 class="section-title">Todo lo que necesitás<br />en un solo lugar</h2>
+
+    <div class="bento-grid">
+
+      <!-- ── Venue (2×2) ──────────────────────────────────────── -->
+      <div class="bento-card bento-large reveal" tabindex="0">
+        <div class="bc-deco" aria-hidden="true">
+          <span class="bcd-tl"></span><span class="bcd-tr"></span>
+          <span class="bcd-bl"></span><span class="bcd-br"></span>
+          <span class="bcd-scan"></span>
+        </div>
+
+        <div class="bento-img-placeholder">
+          <div class="bento-venue-lines" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <!-- Scanline overlay -->
+          <div class="venue-scanlines" aria-hidden="true"></div>
+          <!-- Location tag -->
+          <div class="venue-coords" aria-hidden="true">9.9315° N, 84.0785° W</div>
+          <div class="bento-img-inner">
+            <div class="bento-venue-pin">
+              <Icon name="map_pin" size={16} class="icon-cyan" />
+              <span class="bento-img-label">Auditorio Nacional</span>
+            </div>
+            <span class="bento-img-sub">Contiguo al Museo de los Niños · San José, CR</span>
+          </div>
+        </div>
+
+        <div class="bento-card-content">
+          <p class="bento-tag">Venue</p>
+          <h3>Auditorio Nacional</h3>
+          <p>El venue de hacking más icónico de Costa Rica. Centro histórico, acceso fácil, lleno de historia.</p>
+          <div class="venue-badges">
+            <span class="vb">🚇 Metro cercano</span>
+            <span class="vb">📶 WiFi Gigabit</span>
+            <span class="vb">♿ Accesible</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Charlas ──────────────────────────────────────────── -->
+      <div class="bento-card bento-accent reveal" tabindex="0">
+        <div class="bc-deco" aria-hidden="true">
+          <span class="bcd-tl"></span><span class="bcd-tr"></span>
+          <span class="bcd-bl"></span><span class="bcd-br"></span>
+          <span class="bcd-scan"></span>
+        </div>
+        <div class="bento-card-icon icon-box-cyan">
+          <Icon name="terminal" size={20} />
+        </div>
+        <p class="bento-tag">Programa</p>
+        <h3>28+ Charlas</h3>
+        <p>Red Team, Blue Team, IA, hardware, cloud — dos días de conocimiento sin filtros.</p>
+
+        <!-- Topic distribution -->
+        <div class="topic-bars">
+          <div class="tb-row">
+            <span class="tb-label">Red Team</span>
+            <div class="tb-track"><div class="tb-fill" style="--w:52%;--c:var(--magenta)"></div></div>
+            <span class="tb-count">8</span>
+          </div>
+          <div class="tb-row">
+            <span class="tb-label">Blue Team</span>
+            <div class="tb-track"><div class="tb-fill" style="--w:42%;--c:var(--cyan)"></div></div>
+            <span class="tb-count">6</span>
+          </div>
+          <div class="tb-row">
+            <span class="tb-label">AI / LLM</span>
+            <div class="tb-track"><div class="tb-fill" style="--w:26%;--c:var(--purple)"></div></div>
+            <span class="tb-count">4</span>
+          </div>
+          <div class="tb-row">
+            <span class="tb-label">Hardware</span>
+            <div class="tb-track"><div class="tb-fill" style="--w:20%;--c:var(--green)"></div></div>
+            <span class="tb-count">3</span>
+          </div>
+        </div>
+
+        <a href="/charlas" class="bento-link bento-link-cyan">
+          Ver todas las charlas <Icon name="arrow_right" size={14} />
+        </a>
+      </div>
+
+      <!-- ── CTF ─────────────────────────────────────────────── -->
+      <div class="bento-card reveal" tabindex="0">
+        <div class="bc-deco" aria-hidden="true">
+          <span class="bcd-tl"></span><span class="bcd-tr"></span>
+          <span class="bcd-bl"></span><span class="bcd-br"></span>
+          <span class="bcd-scan"></span>
+        </div>
+        <div class="bento-card-icon icon-box-magenta">
+          <Icon name="flag" size={20} />
+        </div>
+        <p class="bento-tag">Competencia</p>
+        <h3>CTF</h3>
+        <p>Capture The Flag en vivo. Categorías para todos los niveles con premiación en el escenario.</p>
+
+        <!-- CTF levels -->
+        <div class="ctf-levels">
+          <div class="ctf-lvl beginner">
+            <span class="ctf-pip">●</span>
+            <span>Principiante</span>
+          </div>
+          <div class="ctf-lvl intermediate">
+            <span class="ctf-pip">●●</span>
+            <span>Intermedio</span>
+          </div>
+          <div class="ctf-lvl hard">
+            <span class="ctf-pip">●●●</span>
+            <span>Avanzado</span>
+          </div>
+        </div>
+
+        <a href="https://ctf.pwnedcr.com" target="_blank" rel="noopener noreferrer" class="bento-link bento-link-magenta">
+          Ir al CTF <Icon name="external" size={13} />
+        </a>
+      </div>
+
+      <!-- ── Talleres ─────────────────────────────────────────── -->
+      <div class="bento-card reveal" tabindex="0">
+        <div class="bc-deco" aria-hidden="true">
+          <span class="bcd-tl"></span><span class="bcd-tr"></span>
+          <span class="bcd-bl"></span><span class="bcd-br"></span>
+          <span class="bcd-scan"></span>
+        </div>
+        <div class="bento-card-icon icon-box-cyan">
+          <Icon name="cpu" size={20} />
+        </div>
+        <p class="bento-tag">Práctico</p>
+        <h3>8 Talleres</h3>
+        <p>Hands-on: Active Directory, hardware hacking, RFID, APIs, intro CTF.</p>
+
+        <div class="workshop-meta">
+          <div class="wm-item">
+            <span class="wm-num" style="color:var(--green)">6</span>
+            <span class="wm-label">gratuitos</span>
+          </div>
+          <div class="wm-sep"></div>
+          <div class="wm-item">
+            <span class="wm-num" style="color:var(--cyan)">2</span>
+            <span class="wm-label">$40–$65</span>
+          </div>
+          <div class="wm-sep"></div>
+          <div class="wm-item">
+            <span class="wm-num" style="color:var(--magenta)">3h</span>
+            <span class="wm-label">promedio</span>
+          </div>
+        </div>
+
+        <a href="/talleres" class="bento-link bento-link-cyan">
+          Ver talleres <Icon name="arrow_right" size={14} />
+        </a>
+      </div>
+
+      <!-- ── Speed Interviews ─────────────────────────────────── -->
+      <div class="bento-card reveal" tabindex="0">
+        <div class="bc-deco" aria-hidden="true">
+          <span class="bcd-tl"></span><span class="bcd-tr"></span>
+          <span class="bcd-bl"></span><span class="bcd-br"></span>
+          <span class="bcd-scan"></span>
+        </div>
+        <div class="bento-card-icon icon-box-purple">
+          <Icon name="network" size={20} />
+        </div>
+        <p class="bento-tag">Carrera</p>
+        <h3>Speed Interviews</h3>
+        <p>Reuniones 1:1 de 5 minutos con empresas de seguridad que están contratando.</p>
+
+        <div class="speed-int-info">
+          <div class="si-row">
+            <span>10+ empresas participantes</span>
+          </div>
+          <div class="si-row">
+            <span>Todos los niveles de experiencia</span>
+          </div>
+          <div class="si-row">
+            <span>Totalmente gratis para asistentes</span>
+          </div>
+        </div>
+
+        <span class="bento-link bento-link-muted">Detalles próximamente</span>
+      </div>
+
+      <!-- ── Stats / DC11506 ──────────────────────────────────── -->
+      <div class="bento-card bento-stats reveal" tabindex="0">
+        <div class="bc-deco" aria-hidden="true">
+          <span class="bcd-tl"></span><span class="bcd-tr"></span>
+          <span class="bcd-bl"></span><span class="bcd-br"></span>
+          <span class="bcd-scan"></span>
+        </div>
+
+        <div class="stats-mini">
+          <div>
+            <span class="stat-n">8+</span>
+            <span class="stat-l">Ediciones</span>
+          </div>
+          <div>
+            <span class="stat-n">500+</span>
+            <span class="stat-l">Asistentes</span>
+          </div>
+          <div>
+            <span class="stat-n">8+</span>
+            <span class="stat-l">Países</span>
+          </div>
+          <div>
+            <span class="stat-n stat-green">Gratis</span>
+            <span class="stat-l">Siempre gratis</span>
+          </div>
+        </div>
+
+        <p class="bento-tag" style="margin-top:1rem">DC11506 · Comunidad desde 2017</p>
+        <h3>DEF CON Group CR</h3>
+        <p>El grupo oficial de DEF CON en Costa Rica. La comunidad que hace posible que todo esto pase — año tras año, sin cobrar entrada.</p>
+
+        <!-- DEF CON badge -->
+        <div class="defcon-badge">
+          <span class="db-text">OFICIAL</span>
+          <span class="db-name">DEF CON GROUP</span>
+          <span class="db-id">DC11506</span>
+        </div>
+      </div>
+
+      <!-- ── Meetups ──────────────────────────────────────────── -->
+      <div class="bento-card reveal" tabindex="0">
+        <div class="bc-deco" aria-hidden="true">
+          <span class="bcd-tl"></span><span class="bcd-tr"></span>
+          <span class="bcd-bl"></span><span class="bcd-br"></span>
+          <span class="bcd-scan"></span>
+        </div>
+        <div class="bento-card-icon icon-box-cyan">
+          <Icon name="shield_check" size={20} />
+        </div>
+        <p class="bento-tag">Comunidad</p>
+        <h3>Meetups & Side Events</h3>
+        <p>Eventos paralelos durante el día de la conferencia.</p>
+
+        <div class="meetup-list">
+          <div class="ml-item">
+            <span class="ml-dot" style="background:var(--magenta)"></span>
+            <div>
+              <span class="ml-name">Root Sisterhood Pop-up</span>
+              <span class="ml-desc">Mujeres en ciberseguridad</span>
+            </div>
+          </div>
+          <div class="ml-item">
+            <span class="ml-dot" style="background:var(--cyan)"></span>
+            <div>
+              <span class="ml-name">DC11506 × HTB Meetup</span>
+              <span class="ml-desc">Comunidad Hack The Box</span>
+            </div>
+          </div>
+          <div class="ml-item">
+            <span class="ml-dot" style="background:var(--green)"></span>
+            <div>
+              <span class="ml-name">Networking Libre</span>
+              <span class="ml-desc">Sin agenda, networking libre</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /bento-grid -->
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* Staggered reveal on scroll */
+  gsap.utils.toArray<HTMLElement>('.reveal').forEach((el, i) => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+      opacity: 0, y: 40,
+      duration: 0.65,
+      delay: (i % 3) * 0.07,
+      ease: 'power2.out',
+    });
+  });
+
+  /* Topic bar animated fill on scroll-enter */
+  ScrollTrigger.create({
+    trigger: '.topic-bars',
+    start: 'top 82%',
+    once: true,
+    onEnter() {
+      document.querySelectorAll<HTMLElement>('.tb-fill').forEach((bar, i) => {
+        gsap.from(bar, { scaleX: 0, transformOrigin: 'left', duration: 0.7, delay: i * 0.1, ease: 'power2.out' });
+      });
+    },
+  });
+
+  /* Subtle 3D tilt on hover (mouse tracking per card) */
+  document.querySelectorAll<HTMLElement>('.bento-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect   = card.getBoundingClientRect();
+      const cx     = rect.left + rect.width  / 2;
+      const cy     = rect.top  + rect.height / 2;
+      const dx     = (e.clientX - cx) / (rect.width  / 2);
+      const dy     = (e.clientY - cy) / (rect.height / 2);
+      const tiltX  = -dy * 6;
+      const tiltY  =  dx * 6;
+      card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+</script>
+
+<style>
+  /* ════════════════════════════════════════ SECTION */
+  .bento-section { background: var(--bg); }
+
+  .bento-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--cyan);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ════════════════════════════════════════ GRID */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  /* ════════════════════════════════════════ CARD BASE */
+  .bento-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition:
+      border-color 0.3s,
+      transform 0.15s ease,
+      box-shadow 0.3s;
+    will-change: transform;
+  }
+
+  /* Hover: glow + shadow */
+  .bento-card:hover {
+    border-color: rgba(0, 229, 255, 0.45);
+    box-shadow:
+      0 0 0 1px rgba(0,229,255,0.12),
+      0 12px 40px rgba(0,0,0,0.5),
+      0 0 30px rgba(0,229,255,0.05);
+  }
+
+  /* Hover: inner radial glow */
+  .bento-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at var(--mx,50%) var(--my,50%),
+      rgba(0,229,255,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: var(--r-lg);
+  }
+  .bento-card:hover::after { opacity: 1; }
+
+  /* ════════════════════════════════════════ CORNER BRACKETS + SCAN */
+  .bc-deco {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: var(--r-lg);
+    z-index: 1;
+  }
+
+  /* Corner brackets */
+  .bcd-tl, .bcd-tr, .bcd-bl, .bcd-br {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--cyan);
+    border-style: solid;
+    border-width: 0;
+    opacity: 0;
+    transition: opacity 0.25s, width 0.25s, height 0.25s;
+  }
+  .bcd-tl { top: 8px;    left: 8px;   border-top-width: 1.5px;    border-left-width: 1.5px; }
+  .bcd-tr { top: 8px;    right: 8px;  border-top-width: 1.5px;    border-right-width: 1.5px; }
+  .bcd-bl { bottom: 8px; left: 8px;   border-bottom-width: 1.5px; border-left-width: 1.5px; }
+  .bcd-br { bottom: 8px; right: 8px;  border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+  .bento-card:hover .bcd-tl,
+  .bento-card:hover .bcd-tr,
+  .bento-card:hover .bcd-bl,
+  .bento-card:hover .bcd-br {
+    opacity: 0.8;
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Scan line */
+  .bcd-scan {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent 0%, var(--cyan) 50%, transparent 100%);
+    transform: translateY(-4px);
+    opacity: 0;
+    transition: none;
+  }
+  .bento-card:hover .bcd-scan {
+    animation: scanDown 0.55s ease-out forwards;
+    opacity: 1;
+  }
+  @keyframes scanDown {
+    0%   { transform: translateY(0);    opacity: 0.9; }
+    80%  { opacity: 0.5; }
+    100% { transform: translateY(400px); opacity: 0; }
+  }
+
+  /* Card sizes */
+  .bento-large  { grid-column: span 2; grid-row: span 2; padding: 0; }
+  .bento-accent { background: linear-gradient(135deg, var(--surface) 0%, rgba(0,229,255,0.04) 100%); }
+  .bento-stats  { grid-column: span 2; }
+
+  /* ════════════════════════════════════════ VENUE CARD */
+  .bento-img-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(160deg, var(--surface2) 0%, #050014 100%);
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bento-venue-lines {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .bento-venue-lines span {
+    position: absolute;
+    width: 1px;
+    height: 200%;
+    top: -50%;
+    background: linear-gradient(to bottom, transparent, rgba(0,229,255,0.12), transparent);
+    animation: vline 3s ease-in-out infinite;
+  }
+  .bento-venue-lines span:nth-child(1) { left: 15%; animation-delay: 0s; }
+  .bento-venue-lines span:nth-child(2) { left: 35%; animation-delay: 0.6s; background: linear-gradient(to bottom, transparent, rgba(233,30,140,0.1), transparent); }
+  .bento-venue-lines span:nth-child(3) { left: 55%; animation-delay: 1.2s; }
+  .bento-venue-lines span:nth-child(4) { left: 72%; animation-delay: 0.3s; background: linear-gradient(to bottom, transparent, rgba(233,30,140,0.1), transparent); }
+  .bento-venue-lines span:nth-child(5) { left: 88%; animation-delay: 0.9s; }
+  @keyframes vline {
+    0%, 100% { opacity: 0; transform: translateY(-20%); }
+    50%       { opacity: 1; transform: translateY(20%); }
+  }
+
+  .venue-scanlines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      0deg, transparent, transparent 3px,
+      rgba(0,229,255,0.02) 3px, rgba(0,229,255,0.02) 4px
+    );
+    pointer-events: none;
+  }
+
+  .venue-coords {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: rgba(0,229,255,0.4);
+    letter-spacing: 1px;
+    background: rgba(8,0,26,0.6);
+    padding: 0.2rem 0.5rem;
+    border: 1px solid rgba(0,229,255,0.12);
+    border-radius: 3px;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .bento-card:hover .venue-coords { opacity: 1; }
+
+  .bento-img-inner {
+    position: relative;
+    z-index: 1;
+    padding: 1.25rem;
+    background: linear-gradient(to top, rgba(8,0,26,0.95), rgba(8,0,26,0.4) 60%, transparent);
+    width: 100%;
+  }
+  .bento-venue-pin {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.3rem;
+  }
+  .bento-img-label {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #fff;
+  }
+  .bento-img-sub {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    display: block;
+  }
+  .bento-large .bento-card-content { padding: 1.25rem; position: relative; z-index: 2; }
+
+  .venue-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+  .vb {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: rgba(107,107,154,0.75);
+    background: rgba(0,229,255,0.05);
+    border: 1px solid rgba(0,229,255,0.12);
+    padding: 0.2rem 0.55rem;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .bento-card:hover .vb {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .bento-card:hover .vb:nth-child(2) { transition-delay: 0.05s; }
+  .bento-card:hover .vb:nth-child(3) { transition-delay: 0.1s; }
+
+  /* ════════════════════════════════════════ ICON BOXES */
+  .bento-card-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r);
+    margin-bottom: 1rem;
+    border: 1px solid;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    z-index: 2;
+  }
+  .bento-card:hover .bento-card-icon {
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 0 16px currentColor;
+  }
+  .icon-box-cyan    { color: var(--cyan);    border-color: rgba(0,229,255,0.25);   background: rgba(0,229,255,0.07); }
+  .icon-box-magenta { color: var(--magenta); border-color: rgba(233,30,140,0.25);  background: rgba(233,30,140,0.07); }
+  .icon-box-purple  { color: var(--purple);  border-color: rgba(124,58,237,0.25);  background: rgba(124,58,237,0.07); }
+  .icon-cyan    { color: var(--cyan); }
+  .icon-magenta { color: var(--magenta); }
+
+  /* ════════════════════════════════════════ TYPOGRAPHY */
+  .bento-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .bento-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+    position: relative;
+    z-index: 2;
+    transition: color 0.25s;
+  }
+  .bento-card:hover h3 { color: #fff; }
+  .bento-card p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 0.85rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .bento-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    transition: opacity 0.2s, gap 0.2s;
+    text-decoration: none;
+    position: relative;
+    z-index: 2;
+  }
+  .bento-link:hover { opacity: 0.75; gap: 0.6rem; text-decoration: none; }
+  .bento-link-cyan    { color: var(--cyan); }
+  .bento-link-magenta { color: var(--magenta); }
+  .bento-link-muted   { color: var(--muted); cursor: default; pointer-events: none; font-family: var(--font-mono); font-size: 0.72rem; }
+
+  /* ════════════════════════════════════════ TOPIC BARS */
+  .topic-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin: 0.75rem 0;
+    position: relative;
+    z-index: 2;
+  }
+  .tb-row {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr 1.5rem;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .tb-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: rgba(107,107,154,0.75);
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .tb-track {
+    height: 3px;
+    background: rgba(107,107,154,0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .tb-fill {
+    height: 100%;
+    width: var(--w);
+    background: var(--c);
+    border-radius: 2px;
+    box-shadow: 0 0 6px var(--c);
+  }
+  .tb-count {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: rgba(107,107,154,0.6);
+    text-align: right;
+  }
+
+  /* ════════════════════════════════════════ CTF LEVELS */
+  .ctf-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin: 0.6rem 0;
+    position: relative;
+    z-index: 2;
+  }
+  .ctf-lvl {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .bento-card:hover .ctf-lvl { color: rgba(200,200,220,0.8); }
+  .ctf-pip {
+    letter-spacing: -3px;
+    font-size: 0.55rem;
+  }
+  .ctf-lvl.beginner    .ctf-pip { color: var(--green); }
+  .ctf-lvl.intermediate .ctf-pip { color: var(--cyan); }
+  .ctf-lvl.hard        .ctf-pip { color: var(--magenta); }
+
+  /* ════════════════════════════════════════ WORKSHOP META */
+  .workshop-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.6rem 0;
+    position: relative;
+    z-index: 2;
+  }
+  .wm-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+  }
+  .wm-num {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .wm-label {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .wm-sep {
+    width: 1px;
+    height: 28px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  /* ════════════════════════════════════════ SPEED INTERVIEWS */
+  .speed-int-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0.6rem 0;
+    position: relative;
+    z-index: 2;
+  }
+  .si-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.4;
+    transition: color 0.25s;
+  }
+  .bento-card:hover .si-row { color: rgba(180,180,210,0.85); }
+  .si-icon { font-size: 0.9rem; flex-shrink: 0; }
+
+  /* ════════════════════════════════════════ STATS CARD */
+  .stats-mini {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .stat-n {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--cyan);
+    line-height: 1;
+    transition: text-shadow 0.3s;
+  }
+  .stat-green { color: var(--green) !important; }
+  .bento-card:hover .stat-n { text-shadow: 0 0 12px currentColor; }
+  .stat-l {
+    display: block;
+    font-size: 0.62rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.2rem;
+  }
+
+  .defcon-badge {
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: 0.75rem;
+    border: 1px solid rgba(0,229,255,0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .bento-card:hover .defcon-badge { opacity: 1; transform: translateY(0); }
+  .db-text {
+    background: var(--cyan);
+    color: #000;
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding: 0.15rem 0.6rem;
+    text-align: center;
+  }
+  .db-name {
+    background: rgba(0,229,255,0.08);
+    color: var(--cyan);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 2px;
+    padding: 0.2rem 0.6rem;
+    text-align: center;
+  }
+  .db-id {
+    background: rgba(0,0,0,0.4);
+    color: rgba(0,229,255,0.6);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 0.2rem 0.6rem;
+    text-align: center;
+  }
+
+  /* ════════════════════════════════════════ MEETUPS */
+  .meetup-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin: 0.5rem 0;
+    position: relative;
+    z-index: 2;
+  }
+  .ml-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 5px;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .bento-card:hover .ml-item {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.05);
+  }
+  .ml-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px currentColor;
+  }
+  .ml-name {
+    display: block;
+    font-size: 0.78rem;
+    color: #fff;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .ml-desc {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* ════════════════════════════════════════ RESPONSIVE */
+  @media (max-width: 900px) {
+    .bento-grid { grid-template-columns: repeat(2, 1fr); }
+    .bento-large { grid-column: span 2; }
+    .bento-stats { grid-column: span 2; }
+  }
+  @media (max-width: 560px) {
+    .bento-grid  { grid-template-columns: 1fr; }
+    .bento-large { grid-column: span 1; grid-row: span 1; }
+    .bento-stats { grid-column: span 1; }
+    .bento-img-placeholder { aspect-ratio: 16/9; }
+    .stats-mini  { gap: 0.75rem; }
+  }
+</style>

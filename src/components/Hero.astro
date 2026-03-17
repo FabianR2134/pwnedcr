@@ -1,0 +1,678 @@
+---
+const EVENT_DATE = '2026-10-17T08:00:00-06:00';
+---
+
+<section class="hero" id="hero">
+
+  <!-- Capa 0: Three.js canvas (más profundo) -->
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+  <!-- Capa 1: Speed lines diagonales (estilo screenshot pwnedcr.com) -->
+  <div class="speed-lines" aria-hidden="true">
+    {Array.from({length: 18}).map((_, i) => (
+      <div class={`speed-line speed-line--${i % 3 === 0 ? 'cyan' : i % 3 === 1 ? 'magenta' : 'white'}`}
+           style={`top:${5 + i * 5.2}%;animation-delay:${i * 0.18}s;opacity:${0.15 + (i % 4) * 0.07}`}
+      />
+    ))}
+  </div>
+
+  <!-- Capa 2: Grid y gradients -->
+  <div class="hero-bg" id="hero-bg" aria-hidden="true">
+    <div class="hero-grid"></div>
+    <div class="hero-glow-cyan"></div>
+    <div class="hero-glow-magenta"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-scanlines"></div>
+  </div>
+
+  <!-- Capa 3: Contenido -->
+  <div class="hero-content" id="hero-content">
+
+    <p class="hero-eyebrow" id="hero-eyebrow">
+      DC11506 × DEF CON Group Costa Rica
+    </p>
+
+    <h1 class="hero-title" id="hero-title" aria-label="PWNEDCR 0x9">
+      <div class="title-overflow">
+        <span class="title-word" id="word-pwned">PWNED</span>
+      </div>
+      <div class="title-overflow">
+        <span class="title-word title-cr" id="word-cr">CR</span>
+        <span class="title-edition" id="word-edition">&nbsp;0x9</span>
+      </div>
+    </h1>
+
+    <p class="hero-sub" id="hero-sub">
+      La conferencia de hacking de Costa Rica
+    </p>
+
+    <p class="hero-date" id="hero-date">
+      <span class="date-dot">◈</span>
+      Auditorio Nacional &nbsp;·&nbsp; San José &nbsp;·&nbsp; Octubre 2026
+    </p>
+
+    <p class="hero-proof" id="hero-proof">
+      <span class="proof-dot"></span>500+ asistentes <span class="proof-sep">/</span> 28+ charlas <span class="proof-sep">/</span> Gratuito
+    </p>
+
+    <!-- Countdown -->
+    <div class="countdown" id="countdown" data-date={EVENT_DATE}>
+      <div class="countdown-block">
+        <span id="cd-days">--</span>
+        <label>días</label>
+      </div>
+      <div class="countdown-block">
+        <span id="cd-hours">--</span>
+        <label>horas</label>
+      </div>
+      <div class="countdown-block">
+        <span id="cd-minutes">--</span>
+        <label>min</label>
+      </div>
+      <div class="countdown-block">
+        <span id="cd-seconds">--</span>
+        <label>seg</label>
+      </div>
+    </div>
+
+    <div class="hero-cta" id="hero-cta">
+      <a
+        href="https://app.tickettailor.com/events/pwnedcr/1848884"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-primary"
+      >
+        Registrarse — Es gratis
+      </a>
+      <a href="/charlas" class="btn-secondary">Ver programa →</a>
+    </div>
+
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-cue" id="scroll-cue" aria-hidden="true">
+    <span class="scroll-cue-text">BAJAR</span>
+    <div class="scroll-cue-line"></div>
+  </div>
+
+</section>
+
+<script>
+  import * as THREE from 'three';
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ────────────────────────────────────────────
+   * THREE.JS — Particle network
+   * ──────────────────────────────────────────── */
+  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
+  const section = document.getElementById('hero') as HTMLElement;
+
+  const PARTICLE_COUNT = 100;
+  const CONNECT_DIST   = 9;
+  const COLORS_HEX     = [0x00e5ff, 0xe91e8c, 0x7c3aed, 0x00ff88];
+
+  const scene    = new THREE.Scene();
+  const camera   = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 32;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  renderer.setClearColor(0x000000, 0);
+
+  // Particles
+  const geo = new THREE.BufferGeometry();
+  const positions = new Float32Array(PARTICLE_COUNT * 3);
+  const colors    = new Float32Array(PARTICLE_COUNT * 3);
+  const velocities: {vx:number,vy:number,vz:number}[] = [];
+
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    positions[i*3]   = (Math.random() - 0.5) * 65;
+    positions[i*3+1] = (Math.random() - 0.5) * 42;
+    positions[i*3+2] = (Math.random() - 0.5) * 22;
+
+    const c = new THREE.Color(COLORS_HEX[Math.floor(Math.random() * COLORS_HEX.length)]);
+    colors[i*3] = c.r; colors[i*3+1] = c.g; colors[i*3+2] = c.b;
+
+    velocities.push({
+      vx: (Math.random() - 0.5) * 0.012,
+      vy: (Math.random() - 0.5) * 0.008,
+      vz: (Math.random() - 0.5) * 0.005,
+    });
+  }
+
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
+
+  const mat = new THREE.ShaderMaterial({
+    vertexShader: `
+      attribute vec3 color;
+      varying vec3 vColor;
+      void main() {
+        vColor = color;
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = 3.5 * (280.0 / -mv.z);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      varying vec3 vColor;
+      void main() {
+        float d = distance(gl_PointCoord, vec2(0.5));
+        if (d > 0.5) discard;
+        float a = pow(1.0 - d * 2.0, 2.0);
+        gl_FragColor = vec4(vColor, a * 0.85);
+      }`,
+    transparent: true, depthWrite: false, vertexColors: true,
+  });
+
+  const points = new THREE.Points(geo, mat);
+  scene.add(points);
+
+  // Lines
+  const lineGeo = new THREE.BufferGeometry();
+  const lineMat = new THREE.LineBasicMaterial({
+    color: 0x00e5ff, transparent: true, opacity: 0.05, depthWrite: false,
+  });
+  const lines = new THREE.LineSegments(lineGeo, lineMat);
+  scene.add(lines);
+
+  function updateLines() {
+    const pos = points.geometry.attributes.position.array as Float32Array;
+    const pts: number[] = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      for (let j = i + 1; j < PARTICLE_COUNT; j++) {
+        const dx = pos[i*3]-pos[j*3], dy = pos[i*3+1]-pos[j*3+1], dz = pos[i*3+2]-pos[j*3+2];
+        if (dx*dx + dy*dy + dz*dz < CONNECT_DIST * CONNECT_DIST) {
+          pts.push(pos[i*3],pos[i*3+1],pos[i*3+2], pos[j*3],pos[j*3+1],pos[j*3+2]);
+        }
+      }
+    }
+    lines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+  }
+
+  let mouse = { x: 0, y: 0 };
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  }, { passive: true });
+
+  let frameCount = 0;
+  let animId: number;
+  let running = true;
+
+  function animate() {
+    if (!running) return;
+    animId = requestAnimationFrame(animate);
+    frameCount++;
+
+    const pos = points.geometry.attributes.position.array as Float32Array;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      pos[i*3]   += velocities[i].vx;
+      pos[i*3+1] += velocities[i].vy;
+      pos[i*3+2] += velocities[i].vz;
+      if (pos[i*3]   >  32) pos[i*3]   = -32;
+      if (pos[i*3]   < -32) pos[i*3]   =  32;
+      if (pos[i*3+1] >  21) pos[i*3+1] = -21;
+      if (pos[i*3+1] < -21) pos[i*3+1] =  21;
+      if (pos[i*3+2] >  11) pos[i*3+2] = -11;
+      if (pos[i*3+2] < -11) pos[i*3+2] =  11;
+    }
+    points.geometry.attributes.position.needsUpdate = true;
+    if (frameCount % 2 === 0) updateLines();
+
+    camera.position.x += (mouse.x * 3.5 - camera.position.x) * 0.025;
+    camera.position.y += (mouse.y * 2.0 - camera.position.y) * 0.025;
+    camera.lookAt(scene.position);
+
+    renderer.render(scene, camera);
+  }
+
+  // Pause when off-screen
+  new IntersectionObserver(entries => {
+    running = entries[0].isIntersecting;
+    if (running) animate();
+    else cancelAnimationFrame(animId);
+  }, { threshold: 0 }).observe(section);
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  animate();
+
+  /* ────────────────────────────────────────────
+   * COUNTDOWN
+   * ──────────────────────────────────────────── */
+  const cdEl = document.getElementById('countdown');
+  const eventDate = cdEl ? new Date(cdEl.dataset.date!) : null;
+
+  function pad(n: number) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    if (!eventDate) return;
+    const diff = eventDate.getTime() - Date.now();
+    const dEl = document.getElementById('cd-days');
+    if (!dEl) return;
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-minutes','cd-seconds'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.textContent = '00';
+      });
+      return;
+    }
+    document.getElementById('cd-days')!.textContent    = pad(Math.floor(diff / 86400000));
+    document.getElementById('cd-hours')!.textContent   = pad(Math.floor((diff % 86400000) / 3600000));
+    document.getElementById('cd-minutes')!.textContent = pad(Math.floor((diff % 3600000) / 60000));
+    document.getElementById('cd-seconds')!.textContent = pad(Math.floor((diff % 60000) / 1000));
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ────────────────────────────────────────────
+   * GSAP ENTRANCE ANIMATION
+   * ──────────────────────────────────────────── */
+  const tl = gsap.timeline({ defaults: { ease: 'power4.out' }, delay: 0.1 });
+
+  tl.from('#hero-eyebrow', { opacity: 0, y: 30, duration: 0.7 })
+    .from('#word-pwned', {
+      yPercent: 110, opacity: 0, duration: 1, ease: 'power4.out',
+    }, '-=0.3')
+    .from('#word-cr', {
+      yPercent: 110, opacity: 0, duration: 1, ease: 'power4.out',
+    }, '-=0.7')
+    .from('#word-edition', {
+      opacity: 0, x: -20, duration: 0.6,
+    }, '-=0.5')
+    .from('#hero-sub',   { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
+    .from('#hero-date',  { opacity: 0, y: 20, duration: 0.5 }, '-=0.2')
+    .from('#hero-proof', { opacity: 0, y: 20, duration: 0.5 }, '-=0.2')
+    .from('.countdown',  { opacity: 0, y: 20, duration: 0.5 }, '-=0.1')
+    .from('#hero-cta',   { opacity: 0, y: 20, duration: 0.5 }, '-=0.1')
+    .from('#scroll-cue', { opacity: 0, duration: 0.5 }, '-=0.1');
+
+  /* ────────────────────────────────────────────
+   * SCROLL PARALLAX (multicapa)
+   * ──────────────────────────────────────────── */
+  const parallaxOpts = {
+    trigger: section,
+    start: 'top top',
+    end: 'bottom top',
+    scrub: 1.5,
+  };
+
+  // Background grid se mueve lento
+  gsap.to('#hero-bg', {
+    yPercent: -15,
+    ease: 'none',
+    scrollTrigger: { ...parallaxOpts, scrub: 2 },
+  });
+
+  // Contenido se eleva y se desvanece antes de salir
+  gsap.to('#hero-content', {
+    yPercent: -20,
+    opacity: 0,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: section,
+      start: 'top top',
+      end: '60% top',
+      scrub: 1,
+    },
+  });
+
+  // Canvas particles drift up lento
+  gsap.to('#hero-canvas', {
+    yPercent: -8,
+    ease: 'none',
+    scrollTrigger: { ...parallaxOpts, scrub: 3 },
+  });
+
+  // Speed lines se mueven a otra velocidad
+  gsap.to('.speed-lines', {
+    yPercent: -30,
+    ease: 'none',
+    scrollTrigger: { ...parallaxOpts, scrub: 1 },
+  });
+
+  // Scroll cue desaparece rápido
+  gsap.to('#scroll-cue', {
+    opacity: 0,
+    duration: 0.3,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: section,
+      start: 'top+=100 top',
+      end: 'top+=200 top',
+      scrub: true,
+    },
+  });
+
+  /* ────────────────────────────────────────────
+   * GLITCH PERIÓDICO en el título
+   * ──────────────────────────────────────────── */
+  const titleEl = document.getElementById('hero-title');
+  if (titleEl) {
+    const glitch = gsap.timeline({ repeat: -1, repeatDelay: 5, delay: 3, paused: false });
+    glitch
+      .to(titleEl, { skewX: 12,  duration: 0.04, ease: 'none' })
+      .to(titleEl, { skewX: 0,   duration: 0.04 })
+      .to(titleEl, { opacity: 0.7, x: 5, duration: 0.04 })
+      .to(titleEl, { opacity: 1,   x: 0, duration: 0.04 })
+      .to(titleEl, { x: -4, duration: 0.04 })
+      .to(titleEl, { x: 0,  duration: 0.04 });
+  }
+
+  /* ── Scroll cue pulse ── */
+  gsap.to('.scroll-cue-line', {
+    scaleY: 0, transformOrigin: 'bottom center',
+    repeat: -1, yoyo: true, duration: 0.9, ease: 'power1.inOut',
+  });
+</script>
+
+<style>
+  /* ── Canvas Three.js ── */
+  #hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* ── Hero section ── */
+  .hero {
+    position: relative;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: clip;
+    padding: 6rem 1.5rem 4rem;
+    background: var(--bg);
+  }
+
+  /* ── Speed lines (diagonal - estilo pwnedcr.com) ── */
+  .speed-lines {
+    position: absolute;
+    inset: -20% 0 -20%;
+    transform: rotate(-15deg);
+    z-index: 2;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .speed-line {
+    position: absolute;
+    left: -10%;
+    width: 120%;
+    height: 1.5px;
+    border-radius: 1px;
+    animation: speedLine 3.5s linear infinite;
+  }
+  .speed-line--cyan    { background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
+  .speed-line--magenta { background: linear-gradient(90deg, transparent, var(--magenta), transparent); }
+  .speed-line--white   { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); }
+
+  @keyframes speedLine {
+    0%   { transform: translateX(-60%) scaleX(0.3); opacity: 0; }
+    15%  { opacity: 1; transform: translateX(-30%) scaleX(1); }
+    85%  { opacity: 1; }
+    100% { transform: translateX(60%) scaleX(0.3); opacity: 0; }
+  }
+
+  /* ── Background layers ── */
+  .hero-bg {
+    position: absolute;
+    inset: -15%;
+    z-index: 0;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .hero-glow-cyan {
+    position: absolute;
+    top: -10%; left: -20%;
+    width: 70%; height: 70%;
+    background: radial-gradient(ellipse, rgba(0,229,255,0.12) 0%, transparent 70%);
+    filter: blur(40px);
+  }
+
+  .hero-glow-magenta {
+    position: absolute;
+    top: 20%; right: -10%;
+    width: 60%; height: 60%;
+    background: radial-gradient(ellipse, rgba(233,30,140,0.1) 0%, transparent 70%);
+    filter: blur(50px);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(8,0,26,0.3) 0%,
+      rgba(8,0,26,0.6) 50%,
+      var(--bg) 100%
+    );
+  }
+
+  .hero-scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.06) 2px,
+      rgba(0,0,0,0.06) 4px
+    );
+    pointer-events: none;
+  }
+
+  /* ── Content ── */
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 0 auto;
+    will-change: transform, opacity;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--cyan);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0.85;
+  }
+
+  /* Title with clip for reveal animation */
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 14vw, 10rem);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -4px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title-overflow {
+    overflow: hidden;
+    display: flex;
+    align-items: baseline;
+    gap: 0.2em;
+  }
+
+  .title-word {
+    display: inline-block;
+    color: #fff;
+    text-shadow: 0 0 60px rgba(0,229,255,0.3);
+  }
+
+  .title-cr {
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+  }
+
+  .title-edition {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--cyan);
+    letter-spacing: 4px;
+    text-shadow: 0 0 40px rgba(0,229,255,0.6), 0 0 80px rgba(0,229,255,0.3);
+    align-self: center;
+    -webkit-text-fill-color: initial;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-date {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--cyan);
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+  }
+  .date-dot { margin-right: 0.5rem; color: var(--magenta); }
+
+  .hero-proof {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 2px;
+    margin-bottom: 2.5rem;
+    font-family: var(--font-mono);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .proof-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 6px var(--cyan);
+    flex-shrink: 0;
+  }
+  .proof-sep { color: rgba(255,255,255,0.15); }
+
+  /* Countdown */
+  .countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .countdown-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 0.875rem 1.25rem;
+    min-width: 80px;
+    background: rgba(0,229,255,0.04);
+    border: 1px solid rgba(0,229,255,0.2);
+    border-radius: var(--r);
+    backdrop-filter: blur(8px);
+    transition: border-color 0.3s;
+  }
+  .countdown-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--r);
+    background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(233,30,140,0.05));
+  }
+  .countdown-block:hover { border-color: rgba(0,229,255,0.5); }
+
+  .countdown-block span {
+    font-family: var(--font-mono);
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--cyan);
+    line-height: 1;
+    position: relative;
+    text-shadow: 0 0 20px rgba(0,229,255,0.5);
+  }
+
+  .countdown-block label {
+    font-size: 0.6rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 0.3rem;
+    position: relative;
+  }
+
+  /* CTAs */
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Scroll cue */
+  .scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 10;
+  }
+
+  .scroll-cue-text {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .scroll-cue-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--cyan), transparent);
+    transform-origin: top center;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 600px) {
+    .hero-title { letter-spacing: -2px; }
+    .countdown  { gap: 0.5rem; }
+    .countdown-block { min-width: 64px; padding: 0.6rem 0.75rem; }
+    .countdown-block span { font-size: 1.5rem; }
+    .speed-lines { display: none; }
+  }
+</style>

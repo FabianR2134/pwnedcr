@@ -1,0 +1,262 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const faqs = [
+  {
+    categoria: "Sobre el Evento",
+    items: [
+      {
+        pregunta: "¿Qué es PWNEDCR?",
+        respuesta: "PWNEDCR es la conferencia de ciberseguridad y hacking más grande de Costa Rica, organizada por la comunidad <strong>DC11506</strong> — el capítulo oficial de DEF CON en Costa Rica. La edición 0x8 se realizó el 18 y 19 de octubre de 2025 en el Auditorio Nacional.",
+        open: true,
+      },
+      {
+        pregunta: "¿Quién organiza PWNEDCR?",
+        respuesta: "El evento es creado y operado por <strong>DC11506</strong>, el DEF CON Group de Costa Rica. Es una comunidad local de entusiastas y profesionales de seguridad que organiza encuentros, charlas y actividades de hacking ético durante el año.",
+      },
+      {
+        pregunta: "¿Cuándo y dónde es el PWNEDCR?",
+        respuesta: "La edición 0x9 será en <strong>octubre 2026</strong> en el <strong>Auditorio Nacional</strong>, contiguo al Museo de los Niños, San José, Costa Rica. <a href='https://maps.app.goo.gl/KZ3Ny3g97YjYvSSJ6' target='_blank' rel='noopener noreferrer'>Ver en Google Maps →</a>",
+      },
+      {
+        pregunta: "¿En qué idioma son las charlas?",
+        respuesta: "En <strong>español</strong>. DC11506 es una comunidad bilingüe (ES/EN) pero las charlas del PWNEDCR se realizan en español.",
+      },
+      {
+        pregunta: "¿Qué formato tiene el evento?",
+        respuesta: "Conferencias técnicas, talleres prácticos, CTF y espacios de networking. La agenda se publica en la app <strong>Hacker Tracker</strong> (disponible en App Store y Google Play).",
+      },
+      {
+        pregunta: "¿Quiénes deberían asistir?",
+        respuesta: "Profesionales de ciberseguridad, estudiantes, desarrolladores, personal de sistemas/infraestructura, investigadores y toda persona entusiasta del hacking ético, <strong>desde nivel principiante a avanzado</strong>.",
+      },
+    ],
+  },
+  {
+    categoria: "Registro y Entrada",
+    items: [
+      {
+        pregunta: "¿Cómo me registro?",
+        respuesta: "El registro es gratuito y está disponible en <a href='https://app.tickettailor.com/events/pwnedcr/1848884' target='_blank' rel='noopener noreferrer'>TicketTailor</a>.",
+      },
+      {
+        pregunta: "¿La entrada sirve para los dos días?",
+        respuesta: "Sí, la entrada sirve para ambos días. Si ya asististe el sábado y venís el domingo, <strong>traé tu gafete</strong> ya que es requerido para permanecer en el recinto.",
+      },
+      {
+        pregunta: "¿Puedo llevar a menores de edad?",
+        respuesta: "Sí, el evento es en el Auditorio Nacional (contiguo al Museo de los Niños) y la participación de menores es <strong>gratuita</strong>.",
+      },
+    ],
+  },
+  {
+    categoria: "Talleres",
+    items: [
+      {
+        pregunta: "¿Los talleres son gratuitos?",
+        respuesta: "La mayoría sí. Algunos tienen costo para cubrir materiales de hardware — estos se indican claramente en la <a href='/talleres'>página de talleres</a>.",
+      },
+      {
+        pregunta: "¿Cómo me inscribo a un taller?",
+        respuesta: "Los talleres con link de registro lo requieren. Los demás son por <strong>orden de llegada</strong> el día del evento hasta agotar campos. Asegurate de tener los requisitos de software y VM listos de antemano.",
+      },
+      {
+        pregunta: "¿Necesito traer laptop?",
+        respuesta: "Sí. Todos los talleres son 100% prácticos. No hay equipo disponible para prestar.",
+      },
+      {
+        pregunta: "¿Necesito registro en el evento para los talleres?",
+        respuesta: "Sí, para asistir a los talleres igualmente necesitás estar registrado/a al PWNEDCR (gratis).",
+      },
+      {
+        pregunta: "¿Cómo instalo Kali Linux?",
+        respuesta: "Podés seguir esta guía: <a href='https://gprivate.com/6ilci' target='_blank' rel='noopener noreferrer'>gprivate.com/6ilci</a>. Para soporte, usá el canal <code>#Talleres-PWNED0x8</code> en el Discord.",
+      },
+    ],
+  },
+  {
+    categoria: "CTF y Competencias",
+    items: [
+      {
+        pregunta: "¿Habrá CTF?",
+        respuesta: "Sí. Habrá retos de todos los niveles (introductorio a avanzado), abierto para todas las personas registradas. <strong>Para ser elegible a premios, debés estar físicamente en el PWNEDCR durante la premiación final.</strong>",
+      },
+    ],
+  },
+  {
+    categoria: "En el Evento",
+    items: [
+      {
+        pregunta: "¿Habrá comida, Wi-Fi y networking?",
+        respuesta: "Sí. El Museo de los Niños tiene un área de comidas. También hay áreas de networking dentro del PWNEDCR.",
+      },
+      {
+        pregunta: "¿Habrá transmisión en vivo o grabaciones?",
+        respuesta: "Algunas sesiones podrían publicarse posteriormente en el <a href='https://www.youtube.com/@DC11506' target='_blank' rel='noopener noreferrer'>canal de YouTube de DC11506</a>. Se anunciará en redes oficiales.",
+      },
+      {
+        pregunta: "¿Puedo tomar fotos?",
+        respuesta: "Sí. ¡Etiquetanos en redes sociales para darle más alcance a la comunidad!",
+      },
+      {
+        pregunta: "¿Cómo puedo ser voluntario/a?",
+        respuesta: "Las oportunidades de voluntariado se anuncian en el <a href='https://discord.gg/5vB8S7gQjc' target='_blank' rel='noopener noreferrer'>Discord de DC11506</a>.",
+      },
+      {
+        pregunta: "¿Cómo puedo ser patrocinador?",
+        respuesta: "Completá el formulario de <a href='https://forms.gle/M363ojNzQpAmw2yH8' target='_blank' rel='noopener noreferrer'>Call for Sponsors</a>.",
+      },
+    ],
+  },
+  {
+    categoria: "Información para Asistentes Internacionales",
+    items: [
+      {
+        pregunta: "¿Cómo llego al Auditorio Nacional?",
+        respuesta: "<strong>Dirección:</strong> Auditorio Nacional, Museo de los Niños, San José, CR.<br/><a href='https://maps.app.goo.gl/KZ3Ny3g97YjYvSSJ6' target='_blank' rel='noopener noreferrer'>Ver en Google Maps →</a><br/><br/><strong>Transporte:</strong> Se recomienda <strong>Uber</strong>. Nota: Uber no entra al aeropuerto SJO — debés salir a la calle principal para pedirlo.",
+      },
+      {
+        pregunta: "¿Dónde me puedo hospedar?",
+        respuesta: `<div class='hotels-grid'>
+          <div>
+            <h4>A 5 min caminando (zona segura)</h4>
+            <ul>
+              <li><a href='https://www.booking.com/hotel/cr/villa-tournon.es.html' target='_blank' rel='noopener noreferrer'>Hotel Villa Tournon</a></li>
+              <li><a href='https://www.booking.com/hotel/cr/radisson-europa.es.html' target='_blank' rel='noopener noreferrer'>Hotel Radisson San José</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Otras opciones</h4>
+            <ul>
+              <li><a href='https://www.booking.com/hotel/cr/gran-costa-rica.es.html' target='_blank' rel='noopener noreferrer'>Hotel Gran Costa Rica</a></li>
+              <li><a href='https://www.marriott.com/en-us/hotels/sjode-delta-hotels-san-jose-aurola/overview' target='_blank' rel='noopener noreferrer'>Marriott Aurola</a></li>
+              <li><a href='https://www.booking.com/hotel/cr/holiday-inn-san-jose-la-sabana.html' target='_blank' rel='noopener noreferrer'>Holiday Inn Sabana</a></li>
+              <li><a href='https://www.booking.com/hotel/cr/crowne-plaza-corobici.es.html' target='_blank' rel='noopener noreferrer'>Crowne Plaza Corobicí</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Airbnb</h4>
+            <p>Buscar en <strong>Barrio Escalante</strong> o <strong>Paseo Colón</strong> — ambas zonas a pocos km del museo y seguras.</p>
+          </div>
+        </div>`,
+      },
+    ],
+  },
+];
+---
+
+<Base
+  title="FAQ — PWNEDCR 0x9"
+  description="Preguntas frecuentes sobre el PWNEDCR — registro, talleres, hoteles y más."
+>
+  <Nav currentPage="/faq" />
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="/">Inicio</a> <span>/</span> <span>FAQ</span>
+      </p>
+      <h1>Preguntas Frecuentes</h1>
+      <p class="page-hero-sub">Todo lo que necesitás saber sobre el PWNEDCR</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container faq-container">
+      {faqs.map(group => (
+        <div>
+          <h2 class="faq-category">{group.categoria}</h2>
+          {group.items.map(item => (
+            <details class="faq-item" open={item.open}>
+              <summary>{item.pregunta}</summary>
+              <div set:html={item.respuesta} />
+            </details>
+          ))}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .faq-container { max-width: 760px; }
+
+  .faq-category {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--green);
+    margin: 3rem 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-item summary {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    padding: 1.1rem 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .faq-item summary:hover { color: #fff; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+';
+    font-family: var(--font-mono);
+    color: var(--green);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    transition: transform 0.25s;
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+
+  .faq-item > div {
+    padding: 0 0 1.25rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .faq-item > div :global(strong) { color: var(--text); }
+  .faq-item > div :global(a) { color: var(--green); }
+  .faq-item > div :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    background: var(--surface2);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+  }
+
+  /* Hotels grid inside FAQ */
+  :global(.hotels-grid) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  :global(.hotels-grid h4) {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-mono);
+  }
+  :global(.hotels-grid ul) { list-style: disc; padding-left: 1.25rem; }
+  :global(.hotels-grid li) { margin-bottom: 0.35rem; font-size: 0.875rem; }
+</style>

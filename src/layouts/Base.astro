@@ -1,0 +1,90 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'La conferencia de ciberseguridad y hacking más importante de Costa Rica. Charlas, talleres y CTF.',
+  ogImage = '/assets/og-preview.jpg',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://pwnedcr.com');
+---
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <link rel="canonical" href={canonicalURL} />
+  <meta name="description" content={description} />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image"       content={ogImage} />
+  <meta property="og:url"         content={canonicalURL} />
+  <meta property="og:type"        content="website" />
+  <meta property="og:locale"      content="es_CR" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:site"       content="@pwnedcr" />
+  <meta name="twitter:title"      content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"      content={ogImage} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+  <slot />
+
+  <div id="cursor" aria-hidden="true"></div>
+
+  <script>
+    import Lenis from 'lenis';
+
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+    function raf(time: number) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    const cursor = document.getElementById('cursor');
+    if (cursor) {
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top  = e.clientY + 'px';
+      });
+      document.querySelectorAll('a, button, [role="button"], summary').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+      });
+    }
+  </script>
+
+  <style is:global>
+    #cursor {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+      mix-blend-mode: screen;
+    }
+    #cursor.expanded {
+      width: 24px;
+      height: 24px;
+      background: rgba(0,255,136,0.4);
+    }
+    @media (hover: none) { #cursor { display: none; } }
+  </style>
+</body>
+</html>

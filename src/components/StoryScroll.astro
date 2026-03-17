@@ -1,0 +1,821 @@
+---
+// StoryScroll.astro — Scroll narrativo horizontal
+// Paneles: Red Team · Blue Team
+---
+
+<section class="ss-section" id="story-scroll">
+  <div class="ss-track" id="ss-track">
+
+    <!-- ══════════════════════════════════════════════════════
+         PANEL 0 · RED TEAM
+    ══════════════════════════════════════════════════════════ -->
+    <div class="ss-panel ss-panel-red" id="sp-0">
+
+      <!-- IZQUIERDA: visual 3D -->
+      <div class="ss-visual">
+        <canvas id="canvas-p0" class="ss-canvas"></canvas>
+        <div class="ss-vfx-label">// TORUS_KNOT_THREAT_3D</div>
+      </div>
+
+      <!-- DERECHA: contenido -->
+      <div class="ss-content">
+        <div class="ss-eyebrow-row">
+          <span class="ss-dot magenta"></span>
+          <p class="ss-tag">// red_team.ops — Ofensiva</p>
+        </div>
+
+        <h2 class="ss-headline">
+          <span class="ssh-word ssh-magenta">Red</span>
+          <span class="ssh-word">Team</span>
+        </h2>
+
+        <p class="ss-body">
+          Exploits de día cero. Implantes de hardware. Ingeniería social a escala. Las personas que rompen sistemas de forma responsable — y luego te enseñan cómo lo hicieron.
+        </p>
+
+        <div class="ss-terminal ss-terminal-red">
+          <div class="ss-term-header">
+            <span class="st-dot red"></span><span class="st-dot yellow"></span><span class="st-dot green"></span>
+            <span class="st-title">nmap · fase de reconocimiento</span>
+          </div>
+          <div class="ss-term-body">
+            <div class="st-line st-dim">[*] Iniciando escaneo PWNEDCR 0x9...</div>
+            <div class="st-line"><span class="st-green">[+]</span> Desarrollo de Exploits — 4 charlas</div>
+            <div class="st-line"><span class="st-green">[+]</span> Hacking de Hardware — 3 charlas</div>
+            <div class="st-line"><span class="st-green">[+]</span> Operaciones Red Team — 5 charlas</div>
+            <div class="st-line"><span class="st-green">[+]</span> OSINT &amp; Reconocimiento — 3 charlas</div>
+            <div class="st-line"><span class="st-red">[!]</span> CVE-2024-XXXX · RCE vía buffer overflow</div>
+            <div class="st-line"><span class="st-red">[!]</span> Fallas lógicas en flujos OAuth modernos</div>
+            <div class="st-line st-dim">[*] 15 objetivos identificados. Todas las charlas GRATIS.</div>
+          </div>
+        </div>
+
+        <div class="ss-badges">
+          <span class="ssb red">Exploit Dev</span>
+          <span class="ssb red">Hardware Hacking</span>
+          <span class="ssb red">OSINT</span>
+          <span class="ssb red">Análisis de Malware</span>
+          <span class="ssb red">Pentesting</span>
+          <span class="ssb red">Seguridad Física</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         PANEL 1 · BLUE TEAM
+    ══════════════════════════════════════════════════════════ -->
+    <div class="ss-panel ss-panel-blue" id="sp-1">
+
+      <!-- IZQUIERDA: contenido -->
+      <div class="ss-content">
+        <div class="ss-eyebrow-row">
+          <span class="ss-dot cyan"></span>
+          <p class="ss-tag">// blue_team.defense — Defensa</p>
+        </div>
+
+        <h2 class="ss-headline">
+          <span class="ssh-word ssh-cyan">Blue</span>
+          <span class="ssh-word">Team</span>
+        </h2>
+
+        <p class="ss-body">
+          Ingeniería de detección, caza de amenazas, respuesta a incidentes y forense digital. Los defensores no son pasivos — son quienes mantienen la infraestructura viva mientras está bajo fuego.
+        </p>
+
+        <div class="ss-terminal ss-terminal-blue">
+          <div class="ss-term-header">
+            <span class="st-dot red"></span><span class="st-dot yellow"></span><span class="st-dot green"></span>
+            <span class="st-title">soc-dashboard · en vivo</span>
+          </div>
+          <div class="ss-term-body">
+            <div class="st-line st-dim">╔══════════════════════════════════╗</div>
+            <div class="st-line st-dim">║  FEED DE AMENAZAS — ACTIVO       ║</div>
+            <div class="st-line st-dim">╚══════════════════════════════════╝</div>
+            <div class="st-line"><span class="st-label">ALERTAS  </span><span class="ss-anim-num" data-target="847">0</span> <span class="st-dim">últimas 24h</span></div>
+            <div class="st-line"><span class="st-label">BLOQUEADAS</span><span class="ss-anim-num st-green" data-target="843">0</span></div>
+            <div class="st-line"><span class="st-label">ESCALADAS</span><span class="ss-anim-num st-red" data-target="4">0</span></div>
+            <div class="st-line"><span class="st-label">MTTR    </span><span class="st-cyan">4.2 min</span> <span class="st-dim">promedio</span></div>
+            <div class="st-line st-dim">──────────────────────────────────</div>
+            <div class="st-line"><span class="st-green">[✓]</span> Inteligencia de Amenazas — 6 charlas</div>
+            <div class="st-line"><span class="st-green">[✓]</span> DFIR / Forense — 4 charlas</div>
+            <div class="st-line"><span class="st-green">[✓]</span> Operaciones SOC — 3 charlas</div>
+          </div>
+        </div>
+
+        <div class="ss-badges">
+          <span class="ssb blue">DFIR</span>
+          <span class="ssb blue">Threat Intel</span>
+          <span class="ssb blue">SOC</span>
+          <span class="ssb blue">Malware RE</span>
+          <span class="ssb blue">Detección</span>
+          <span class="ssb blue">Cloud Security</span>
+        </div>
+      </div>
+
+      <!-- DERECHA: visual 3D -->
+      <div class="ss-visual">
+        <canvas id="canvas-p1" class="ss-canvas"></canvas>
+        <div class="ss-vfx-label">// SHIELD_PROTOCOL_v2</div>
+        <div class="ss-float-card ss-float-card-1">
+          <span class="sfc-num" style="color:var(--cyan)">28+</span>
+          <span class="sfc-label">Charlas</span>
+        </div>
+        <div class="ss-float-card ss-float-card-2">
+          <span class="sfc-num" style="color:var(--green)">8</span>
+          <span class="sfc-label">Talleres</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div><!-- /ss-track -->
+
+  <!-- Etiqueta de panel (arriba centro) -->
+  <div class="ss-panel-label" id="ss-panel-label" aria-hidden="true">
+    <span id="ss-label-text">01 · Red Team</span>
+  </div>
+
+  <!-- Barra de progreso -->
+  <div class="ss-progress-wrap" aria-hidden="true">
+    <div class="ss-progress-bar" id="ss-progress-bar"></div>
+  </div>
+
+  <!-- Indicadores -->
+  <div class="ss-dots" aria-hidden="true">
+    <button class="ss-dot-btn active" data-dot="0">
+      <span class="sd-line"></span>
+      <span class="sd-label">Red Team</span>
+    </button>
+    <button class="ss-dot-btn" data-dot="1">
+      <span class="sd-line"></span>
+      <span class="sd-label">Blue Team</span>
+    </button>
+  </div>
+
+  <!-- Velo de transición suave -->
+  <div id="ss-transition-veil" class="ss-transition-veil" aria-hidden="true"></div>
+</section>
+
+<script>
+  import * as THREE from 'three';
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  const PANEL_LABELS = ['01 · Red Team', '02 · Blue Team'];
+
+  /* ── Panel 0: Torus Knot (Red Team) ───────────────────────────── */
+  function initPanel0() {
+    const canvas = document.getElementById('canvas-p0') as HTMLCanvasElement;
+    if (!canvas) return;
+    const w = canvas.parentElement!.clientWidth;
+    const h = canvas.parentElement!.clientHeight;
+    canvas.width = w; canvas.height = h;
+
+    const scene = new THREE.Scene();
+    const cam   = new THREE.PerspectiveCamera(50, w / h, 0.1, 60);
+    cam.position.z = 5.5;
+    const r = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    r.setSize(w, h); r.setPixelRatio(Math.min(devicePixelRatio, 2)); r.setClearColor(0x000000, 0);
+
+    const knot = new THREE.Mesh(
+      new THREE.TorusKnotGeometry(1.3, 0.38, 160, 20, 2, 3),
+      new THREE.MeshBasicMaterial({ color: 0xe91e8c, wireframe: true, transparent: true, opacity: 0.85 }),
+    );
+    scene.add(knot);
+
+    const knot2 = new THREE.Mesh(
+      new THREE.TorusKnotGeometry(1.8, 0.04, 80, 8, 3, 5),
+      new THREE.MeshBasicMaterial({ color: 0x7c3aed, wireframe: true, transparent: true, opacity: 0.4 }),
+    );
+    scene.add(knot2);
+
+    scene.add(new THREE.Mesh(
+      new THREE.SphereGeometry(2.2, 8, 8),
+      new THREE.MeshBasicMaterial({ color: 0xe91e8c, transparent: true, opacity: 0.05, side: THREE.BackSide }),
+    ));
+
+    const pCount = 350;
+    const pPos   = new Float32Array(pCount * 3);
+    const pVel   = new Float32Array(pCount * 3);
+    for (let i = 0; i < pCount; i++) {
+      const phi = Math.random() * Math.PI * 2, theta = Math.random() * Math.PI * 2;
+      const rad = 0.2 + Math.random() * 3;
+      pPos[i*3] = rad * Math.sin(phi) * Math.cos(theta);
+      pPos[i*3+1] = rad * Math.sin(phi) * Math.sin(theta);
+      pPos[i*3+2] = rad * Math.cos(phi);
+      pVel[i*3] = (Math.random() - 0.5) * 0.015;
+      pVel[i*3+1] = (Math.random() - 0.5) * 0.015;
+      pVel[i*3+2] = (Math.random() - 0.5) * 0.015;
+    }
+    const pGeo = new THREE.BufferGeometry();
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+    scene.add(new THREE.Points(pGeo,
+      new THREE.PointsMaterial({ color: 0xe91e8c, size: 0.03, transparent: true, opacity: 0.55 })));
+
+    let mx = 0, my = 0;
+    canvas.addEventListener('mousemove', e => {
+      const rect = canvas.getBoundingClientRect();
+      mx = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
+      my = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
+    });
+    let visible = false;
+    new IntersectionObserver(e => { visible = e[0].isIntersecting; }, { threshold: 0.1 }).observe(canvas);
+
+    function loop() {
+      requestAnimationFrame(loop);
+      if (!visible) return;
+      knot.rotation.x  += 0.006; knot.rotation.y  += 0.01;
+      knot2.rotation.x -= 0.004; knot2.rotation.z += 0.006;
+      const posArr = pGeo.attributes.position.array as Float32Array;
+      for (let i = 0; i < pCount; i++) {
+        posArr[i*3] += pVel[i*3]; posArr[i*3+1] += pVel[i*3+1]; posArr[i*3+2] += pVel[i*3+2];
+        const len = Math.sqrt(posArr[i*3]**2 + posArr[i*3+1]**2 + posArr[i*3+2]**2);
+        if (len > 4 || len < 0.5) { pVel[i*3]*=-1; pVel[i*3+1]*=-1; pVel[i*3+2]*=-1; }
+      }
+      pGeo.attributes.position.needsUpdate = true;
+      knot.position.x += (mx * 0.5 - knot.position.x) * 0.04;
+      knot.position.y += (-my * 0.5 - knot.position.y) * 0.04;
+      r.render(scene, cam);
+    }
+    loop();
+  }
+
+  /* ── Panel 1: Octaedro escudo (Blue Team) ─────────────────────── */
+  function initPanel1() {
+    const canvas = document.getElementById('canvas-p1') as HTMLCanvasElement;
+    if (!canvas) return;
+    const w = canvas.parentElement!.clientWidth;
+    const h = canvas.parentElement!.clientHeight;
+    canvas.width = w; canvas.height = h;
+
+    const scene = new THREE.Scene();
+    const cam   = new THREE.PerspectiveCamera(50, w / h, 0.1, 60);
+    cam.position.z = 5.5;
+    const r = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    r.setSize(w, h); r.setPixelRatio(Math.min(devicePixelRatio, 2)); r.setClearColor(0x000000, 0);
+
+    // Octaedro central — más brillante para mayor visibilidad
+    const oct = new THREE.Mesh(
+      new THREE.OctahedronGeometry(1.4, 1),
+      new THREE.MeshBasicMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.95 }),
+    );
+    scene.add(oct);
+
+    // Anillos orbitales
+    const ringData = [
+      { rx: 0,           ry: 0, rz: 0,            color: 0x00e5ff, op: 0.45 },
+      { rx: Math.PI / 2, ry: 0, rz: 0,            color: 0x7c3aed, op: 0.35 },
+      { rx: Math.PI / 4, ry: 0, rz: Math.PI / 3,  color: 0x00e5ff, op: 0.3  },
+    ];
+    const rings: THREE.Mesh[] = [];
+    ringData.forEach(d => {
+      const ring = new THREE.Mesh(
+        new THREE.TorusGeometry(2.4, 0.016, 4, 100),
+        new THREE.MeshBasicMaterial({ color: d.color, transparent: true, opacity: d.op }),
+      );
+      ring.rotation.set(d.rx, d.ry, d.rz);
+      scene.add(ring);
+      rings.push(ring);
+    });
+
+    // Electrones orbitales
+    const electrons: THREE.Mesh[] = [];
+    ringData.forEach(() => {
+      const e = new THREE.Mesh(
+        new THREE.SphereGeometry(0.09, 8, 8),
+        new THREE.MeshBasicMaterial({ color: 0x00e5ff }),
+      );
+      scene.add(e);
+      electrons.push(e);
+    });
+
+    // Grid de defensa
+    const grid = new THREE.GridHelper(12, 12, 0x00e5ff, 0x00e5ff);
+    const gm = grid.material as THREE.Material;
+    gm.transparent = true; gm.opacity = 0.07;
+    grid.position.y = -3; grid.rotation.x = 0.3;
+    scene.add(grid);
+
+    // Glow interior
+    scene.add(new THREE.Mesh(
+      new THREE.SphereGeometry(1.15, 8, 8),
+      new THREE.MeshBasicMaterial({ color: 0x00e5ff, transparent: true, opacity: 0.06 }),
+    ));
+
+    // Partículas de fondo
+    const pCount = 280;
+    const pPos = new Float32Array(pCount * 3);
+    for (let i = 0; i < pCount * 3; i++) pPos[i] = (Math.random() - 0.5) * 12;
+    const pGeo = new THREE.BufferGeometry();
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+    scene.add(new THREE.Points(pGeo,
+      new THREE.PointsMaterial({ color: 0x00e5ff, size: 0.03, transparent: true, opacity: 0.3 })));
+
+    let visible = false;
+    new IntersectionObserver(e => { visible = e[0].isIntersecting; }, { threshold: 0.1 }).observe(canvas);
+
+    function loop() {
+      requestAnimationFrame(loop);
+      if (!visible) return;
+      const t = performance.now() * 0.001;
+      oct.rotation.x = t * 0.25;
+      oct.rotation.y = t * 0.4;
+      rings[0].rotation.z = t * 0.35;
+      rings[1].rotation.x = -t * 0.3 + Math.PI / 2;
+      rings[2].rotation.y = t * 0.2;
+      electrons.forEach((e, i) => {
+        const angle = t * (0.8 + i * 0.3), radius = 2.4;
+        if (i === 0) e.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius, 0);
+        if (i === 1) e.position.set(Math.cos(angle) * radius, 0, Math.sin(angle) * radius);
+        if (i === 2) e.position.set(0, Math.cos(angle) * radius * Math.cos(Math.PI/3), Math.sin(angle) * radius);
+      });
+      r.render(scene, cam);
+    }
+    loop();
+  }
+
+  /* ── Contadores animados ──────────────────────────────────────── */
+  function animateCounters() {
+    document.querySelectorAll<HTMLElement>('.ss-anim-num').forEach(el => {
+      const target = parseInt(el.dataset.target || '0', 10);
+      gsap.to({ v: 0 }, {
+        v: target, duration: 1.5, ease: 'power2.out',
+        onUpdate() { el.textContent = Math.round((this as any).targets()[0].v).toString(); },
+      });
+    });
+  }
+
+  /* ── Scroll horizontal GSAP ──────────────────────────────────── */
+  const section = document.getElementById('story-scroll')!;
+  const track   = document.getElementById('ss-track')!;
+  const dotBtns = document.querySelectorAll<HTMLElement>('.ss-dot-btn');
+  const bar     = document.getElementById('ss-progress-bar');
+  const labelEl = document.getElementById('ss-label-text');
+  const veilEl  = document.getElementById('ss-transition-veil');
+
+  const PANELS   = 2;
+  const SCROLL_H = window.innerHeight * (PANELS - 1);
+  let countersRun = false;
+
+  if (section && track) {
+    const contentEls = Array.from({length: PANELS}, (_, i) =>
+      document.querySelector<HTMLElement>(`#sp-${i} .ss-content`));
+    const visualEls = Array.from({length: PANELS}, (_, i) =>
+      document.querySelector<HTMLElement>(`#sp-${i} .ss-visual`));
+
+    gsap.to(track, {
+      xPercent: -(100 * (PANELS - 1)),
+      ease: 'none',
+      onUpdate() {
+        const p = this.progress();
+        const floatPos = p * (PANELS - 1);
+        const activeIdx = Math.min(PANELS - 1, Math.round(floatPos));
+
+        dotBtns.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+        if (bar) bar.style.width = (p * 100) + '%';
+        if (labelEl) labelEl.textContent = PANEL_LABELS[activeIdx];
+        if (!countersRun && activeIdx >= 1) { countersRun = true; animateCounters(); }
+
+        // Opacidad y parallax suave por panel
+        for (let i = 0; i < PANELS; i++) {
+          const offset = floatPos - i;
+          const absOff = Math.abs(offset);
+          const opacity = Math.max(0, 1 - absOff * 1.1);
+          const dx = -offset * 24;
+          const scale = 1 - Math.min(absOff * 0.035, 0.035);
+
+          if (contentEls[i]) {
+            contentEls[i]!.style.opacity = String(opacity);
+            contentEls[i]!.style.transform = `translateX(${dx}px) scale(${scale})`;
+          }
+          if (visualEls[i]) {
+            visualEls[i]!.style.opacity = String(Math.max(0, 1 - absOff * 1.3));
+          }
+        }
+
+        // Velo de transición suave en el punto medio
+        if (veilEl) veilEl.style.opacity = String(Math.sin((floatPos % 1) * Math.PI) * 0.1);
+      },
+      scrollTrigger: {
+        trigger: section,
+        pin: true,
+        scrub: 1.8,
+        anticipatePin: 1,
+        start: 'top top',
+        end: `+=${SCROLL_H}`,
+      },
+    });
+
+    setTimeout(() => {
+      initPanel0();
+      initPanel1();
+    }, 200);
+  }
+</script>
+
+<style>
+  /* ══════════════════════════════════════════════ BASE */
+  .ss-section {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .ss-track {
+    display: flex;
+    width: 200vw;
+    height: 100%;
+    will-change: transform;
+  }
+
+  /* ══════════════════════════════════════════════ PANELES */
+  .ss-panel {
+    width: 100vw;
+    height: 100vh;
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  .ss-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: 56px 56px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Red Team: fondo ligeramente más claro + grid magenta */
+  .ss-panel-red {
+    background: var(--bg-mid);
+  }
+  .ss-panel-red::before {
+    background-image:
+      linear-gradient(rgba(233,30,140,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(233,30,140,0.018) 1px, transparent 1px);
+  }
+  /* Glow lateral rojo en la zona del visual */
+  .ss-panel-red::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 55%;
+    background: radial-gradient(ellipse 80% 70% at 30% 50%, rgba(233,30,140,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Visual izquierdo, contenido derecho en Red Team */
+  .ss-panel-red .ss-visual  { order: 1; }
+  .ss-panel-red .ss-content { order: 2; padding: 4rem 4.5rem 4rem 3rem; }
+
+  /* Blue Team: fondo similar + grid cyan, glow azul fuerte */
+  .ss-panel-blue {
+    background: var(--bg-mid);
+  }
+  .ss-panel-blue::before {
+    background-image:
+      linear-gradient(rgba(0,229,255,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.022) 1px, transparent 1px);
+  }
+  /* Glow cyan a la derecha donde está el visual */
+  .ss-panel-blue::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 55%;
+    background: radial-gradient(ellipse 80% 70% at 70% 50%, rgba(0,229,255,0.09) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* Línea accent en el tope del panel azul */
+  .ss-panel-blue .ss-visual::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0,229,255,0.6), transparent);
+    z-index: 6;
+  }
+
+  /* Contenido izquierdo, visual derecho en Blue Team (orden por defecto del HTML) */
+
+  /* ══════════════════════════════════════════════ CONTENIDO */
+  .ss-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.1rem;
+    padding: 4rem 3.5rem 4rem 4.5rem;
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    overflow: hidden;
+    will-change: transform, opacity;
+    transform-origin: center center;
+  }
+
+  .ss-eyebrow-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .ss-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px currentColor;
+  }
+  .ss-dot.cyan    { background: var(--cyan);    color: var(--cyan); }
+  .ss-dot.magenta { background: var(--magenta); color: var(--magenta); }
+
+  .ss-tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 2.5px;
+    color: rgba(107,107,154,0.85);
+    text-transform: uppercase;
+  }
+
+  .ss-headline {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 5.5vw, 5.5rem);
+    font-weight: 900;
+    letter-spacing: -3px;
+    line-height: 0.92;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2em;
+    margin-bottom: 0.1rem;
+  }
+
+  .ssh-word { display: inline-block; }
+  .ssh-cyan    { color: var(--cyan);    text-shadow: 0 0 40px rgba(0,229,255,0.5); }
+  .ssh-magenta { color: var(--magenta); text-shadow: 0 0 40px rgba(233,30,140,0.5); }
+
+  .ss-body {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 420px;
+  }
+
+  /* ══════════════════════════════════════════════ TERMINAL */
+  .ss-terminal {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 229, 255, 0.22);
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 440px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.6;
+    backdrop-filter: blur(6px);
+  }
+
+  .ss-terminal-red  { border-color: rgba(233, 30, 140, 0.28); }
+  .ss-terminal-blue { border-color: rgba(0, 229, 255, 0.3); box-shadow: 0 0 20px rgba(0,229,255,0.06); }
+
+  .ss-term-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.45rem 0.75rem;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .st-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .st-dot.red    { background: #ff5f57; }
+  .st-dot.yellow { background: #febc2e; }
+  .st-dot.green  { background: #28c840; }
+
+  .st-title {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: rgba(107,107,154,0.7);
+    margin-left: 0.4rem;
+    letter-spacing: 1px;
+  }
+
+  .ss-term-body {
+    padding: 0.65rem 0.85rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.08rem;
+    max-height: 220px;
+    overflow: hidden;
+  }
+
+  .st-line { color: rgba(180,180,210,0.9); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .st-line.st-dim { color: rgba(107,107,154,0.6); }
+  .st-prompt { color: var(--green); margin-right: 0.4rem; }
+  .st-green  { color: var(--green); }
+  .st-cyan   { color: var(--cyan); }
+  .st-red    { color: #ff5f57; }
+  .st-label  { color: rgba(107,107,154,0.75); display: inline-block; width: 8.5rem; letter-spacing: 1px; }
+
+  /* ══════════════════════════════════════════════ BADGES */
+  .ss-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    max-width: 440px;
+  }
+
+  .ssb {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border-radius: 3px;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+  .ssb.red  { color: var(--magenta); border-color: rgba(233,30,140,0.35); background: rgba(233,30,140,0.07); }
+  .ssb.blue { color: var(--cyan);    border-color: rgba(0,229,255,0.3);   background: rgba(0,229,255,0.07); }
+
+  /* ══════════════════════════════════════════════ VISUAL 3D */
+  .ss-visual {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    z-index: 2;
+    will-change: opacity;
+  }
+
+  .ss-canvas { width: 100% !important; height: 100% !important; display: block; }
+
+  .ss-vfx-label {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: rgba(0,229,255,0.35);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    z-index: 4;
+  }
+
+  /* ══════════════════════════════════════════════ FLOAT CARDS */
+  .ss-float-card {
+    position: absolute;
+    background: rgba(8, 0, 26, 0.8);
+    border: 1px solid rgba(0,229,255,0.22);
+    border-radius: 8px;
+    padding: 0.75rem 1.1rem;
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .ss-float-card-1 { top: 15%;    right: 6%; }
+  .ss-float-card-2 { bottom: 20%; right: 8%; }
+
+  .sfc-num {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--cyan);
+    line-height: 1;
+  }
+  .sfc-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: rgba(107,107,154,0.75);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ══════════════════════════════════════════════ VELO DE TRANSICIÓN */
+  .ss-transition-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0;
+    background: rgba(8, 0, 26, 1);
+    transition: opacity 0.06s linear;
+  }
+
+  /* ══════════════════════════════════════════════ BARRA DE PROGRESO */
+  .ss-progress-wrap {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: rgba(107,107,154,0.15);
+    z-index: 20;
+  }
+  .ss-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--magenta), var(--cyan));
+    transition: width 0.05s linear;
+  }
+
+  /* ══════════════════════════════════════════════ INDICADORES */
+  .ss-dots {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0;
+    z-index: 20;
+  }
+
+  .ss-dot-btn {
+    background: none; border: none; cursor: default;
+    padding: 0.4rem 0.75rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+    pointer-events: none;
+  }
+
+  .sd-line {
+    display: block;
+    width: 24px; height: 2px;
+    background: rgba(107,107,154,0.3);
+    border-radius: 2px;
+    transition: background 0.4s ease, width 0.4s ease;
+  }
+  .sd-label {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(107,107,154,0.4);
+    transition: color 0.4s ease;
+  }
+
+  .ss-dot-btn[data-dot="0"].active .sd-line {
+    background: var(--magenta); width: 36px;
+    box-shadow: 0 0 8px rgba(233,30,140,0.5);
+  }
+  .ss-dot-btn[data-dot="0"].active .sd-label { color: var(--magenta); }
+
+  .ss-dot-btn[data-dot="1"].active .sd-line {
+    background: var(--cyan); width: 36px;
+    box-shadow: 0 0 8px rgba(0,229,255,0.5);
+  }
+  .ss-dot-btn[data-dot="1"].active .sd-label { color: var(--cyan); }
+
+  /* ══════════════════════════════════════════════ ETIQUETA DE PANEL */
+  .ss-panel-label {
+    position: absolute;
+    top: 1.75rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(107,107,154,0.45);
+    z-index: 20;
+    white-space: nowrap;
+    transition: color 0.4s ease;
+  }
+
+  /* ══════════════════════════════════════════════ RESPONSIVE */
+  @media (max-width: 900px) {
+    .ss-panel {
+      grid-template-columns: 1fr;
+      grid-template-rows: 55vh 45vh;
+    }
+    .ss-panel-red .ss-visual  { order: 1; }
+    .ss-panel-red .ss-content { order: 2; }
+    .ss-content,
+    .ss-panel-red .ss-content {
+      padding: 2.5rem 1.75rem 1.5rem;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      height: auto;
+    }
+    .ss-headline { font-size: clamp(2.2rem, 8vw, 3.5rem); letter-spacing: -2px; }
+    .ss-body     { font-size: 0.875rem; max-width: none; }
+    .ss-terminal { max-width: none; }
+    .ss-float-card { display: none; }
+    .ss-vfx-label  { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .ss-headline { letter-spacing: -1.5px; }
+    .ss-badges   { gap: 0.3rem; }
+    .ssb         { font-size: 0.55rem; padding: 0.2rem 0.5rem; }
+  }
+</style>

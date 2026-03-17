@@ -1,0 +1,188 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { charlas } from '../data/charlas';
+
+const tags = [...new Set(charlas.map(c => c.tag))].sort();
+---
+
+<Base
+  title="Charlas — PWNEDCR 0x9"
+  description="Todas las charlas de ciberseguridad, hacking y tecnología del PWNEDCR."
+>
+  <Nav currentPage="/charlas" />
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="/">Inicio</a> <span>/</span> <span>Charlas</span>
+      </p>
+      <h1>Charlas</h1>
+      <p class="page-hero-sub">PWNEDCR 0x8 — 18 y 19 de Octubre 2025 · {charlas.length} charlas</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- Filter bar -->
+      <div class="filter-bar" id="filter-bar" role="group" aria-label="Filtrar por categoría">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        {tags.map(tag => (
+          <button class="filter-btn" data-filter={tag}>{tag}</button>
+        ))}
+      </div>
+
+      <!-- Talks grid -->
+      <div class="talks-grid" id="talks-grid">
+        {charlas.map((c, i) => (
+          <article
+            class="talk-card"
+            data-tag={c.tag}
+            style={`animation-delay: ${(i % 6) * 0.06}s`}
+          >
+            <div class="talk-header">
+              <span class={`tag tag-${c.tagColor}`}>{c.tag}</span>
+              <h2>{c.titulo}</h2>
+              <p class="talk-speakers">{c.speakers.join(' · ')}</p>
+            </div>
+            <p>{c.descripcion}</p>
+          </article>
+        ))}
+      </div>
+
+      <p class="talks-count" id="talks-count">
+        Mostrando <span id="visible-count">{charlas.length}</span> de {charlas.length} charlas
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ---- Filter ----
+  const filterBar  = document.getElementById('filter-bar')!;
+  const grid       = document.getElementById('talks-grid')!;
+  const countEl    = document.getElementById('visible-count')!;
+  const cards      = Array.from(grid.querySelectorAll<HTMLElement>('.talk-card'));
+
+  filterBar.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.filter-btn');
+    if (!btn) return;
+
+    filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter!;
+    let visible = 0;
+
+    cards.forEach(card => {
+      const show = filter === 'all' || card.dataset.tag === filter;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    countEl.textContent = String(visible);
+  });
+
+  // ---- Scroll reveal ----
+  gsap.from('.talk-card', {
+    scrollTrigger: { trigger: '.talks-grid', start: 'top 85%' },
+    opacity: 0,
+    y: 40,
+    stagger: 0.05,
+    duration: 0.6,
+    ease: 'power2.out',
+  });
+</script>
+
+<style>
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .filter-btn {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { border-color: var(--border-hover); color: var(--text); }
+  .filter-btn.active {
+    background: var(--green);
+    color: #000;
+    border-color: var(--green);
+    font-weight: 700;
+  }
+
+  /* Talks grid */
+  .talks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .talk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .talk-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+  }
+
+  .talk-header { margin-bottom: 0.875rem; }
+
+  .talk-header h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.4;
+    margin: 0.5rem 0 0.4rem;
+  }
+
+  .talk-speakers {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--green);
+    line-height: 1.4;
+  }
+
+  .talk-card > p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .talks-count {
+    margin-top: 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    .talks-grid { grid-template-columns: 1fr; }
+  }
+</style>

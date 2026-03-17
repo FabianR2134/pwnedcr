@@ -1,0 +1,238 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="404 — Segmento no encontrado · PWNEDCR">
+  <Nav />
+
+  <section class="error-section">
+    <div class="container error-inner">
+      <p class="error-eyebrow">Error 0x404</p>
+      <h1 class="glitch" data-text="NOT FOUND">NOT FOUND</h1>
+      <p class="error-sub">Este segmento de red no existe o fue movido.</p>
+      <p class="error-desc">
+        Si llegaste hasta aquí, quizás te interese saber que...
+        hay algo escondido en esta página.
+      </p>
+
+      <!-- Mini CTF -->
+      <div class="ctf-box" id="ctf-box">
+        <p class="ctf-prompt"><span class="ctf-cursor">_</span> Ingresá la flag si la encontrás:</p>
+        <form class="ctf-form" id="ctf-form">
+          <input
+            type="text"
+            id="ctf-input"
+            placeholder="FLAG{...}"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Ingresa la flag"
+          />
+          <button type="submit">Verificar</button>
+        </form>
+        <p class="ctf-result" id="ctf-result"></p>
+      </div>
+
+      <a href="/" class="btn-primary back-btn">← Volver al inicio</a>
+    </div>
+  </section>
+
+  <!-- Easter egg: flag en el código fuente -->
+  <!-- FLAG{pwn3d_th3_404_s3ct10n_s33_y0u_4t_th3_3v3nt} -->
+
+  <Footer />
+</Base>
+
+<script>
+  import gsap from 'gsap';
+
+  // Glitch effect on 404 title
+  const glitchEl = document.querySelector('.glitch') as HTMLElement;
+  if (glitchEl) {
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 3, delay: 1 });
+    tl.to(glitchEl, { skewX: 20, duration: 0.04 })
+      .to(glitchEl, { skewX: 0,  duration: 0.04 })
+      .to(glitchEl, { opacity: 0, x: 8, duration: 0.04 })
+      .to(glitchEl, { opacity: 1, x: 0, duration: 0.04 })
+      .to(glitchEl, { x: -5, duration: 0.04 })
+      .to(glitchEl, { x: 0,  duration: 0.04 })
+      .to(glitchEl, { skewX: -10, duration: 0.04 })
+      .to(glitchEl, { skewX: 0,  duration: 0.04 });
+  }
+
+  // Cursor blink
+  gsap.to('.ctf-cursor', { opacity: 0, repeat: -1, yoyo: true, duration: 0.5 });
+
+  // CTF check
+  const FLAG = 'FLAG{pwn3d_th3_404_s3ct10n_s33_y0u_4t_th3_3v3nt}';
+  const form   = document.getElementById('ctf-form') as HTMLFormElement;
+  const input  = document.getElementById('ctf-input') as HTMLInputElement;
+  const result = document.getElementById('ctf-result')!;
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (input.value.trim() === FLAG) {
+      result.textContent = '✔ ¡Correcto! Sos exactamente el tipo de persona que necesitamos en el PWNEDCR.';
+      result.className = 'ctf-result success';
+      // Confetti-ish: flash green
+      document.body.style.boxShadow = 'inset 0 0 100px rgba(0,255,136,0.15)';
+      setTimeout(() => { document.body.style.boxShadow = ''; }, 1500);
+    } else {
+      result.textContent = '✘ Flag incorrecta. Seguí buscando.';
+      result.className = 'ctf-result fail';
+      gsap.from(form, { x: -8, duration: 0.05, repeat: 5, yoyo: true });
+    }
+  });
+</script>
+
+<style>
+  .error-section {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .error-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .error-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+  }
+
+  .error-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--red);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .glitch {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -3px;
+    line-height: 0.9;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  /* Glitch pseudo-elements */
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    font: inherit;
+  }
+  .glitch::before {
+    color: var(--red);
+    clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+    animation: glitch-1 4s infinite;
+  }
+  .glitch::after {
+    color: var(--green);
+    clip-path: polygon(0 55%, 100% 55%, 100% 70%, 0 70%);
+    animation: glitch-2 4s infinite;
+  }
+
+  @keyframes glitch-1 {
+    0%, 95%, 100% { transform: none; opacity: 0; }
+    96%           { transform: translateX(-4px); opacity: 1; }
+    98%           { transform: translateX(4px); opacity: 1; }
+  }
+  @keyframes glitch-2 {
+    0%, 93%, 100% { transform: none; opacity: 0; }
+    94%           { transform: translateX(4px); opacity: 1; }
+    96%           { transform: translateX(-4px); opacity: 1; }
+  }
+
+  .error-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .error-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  /* CTF box */
+  .ctf-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+    max-width: 480px;
+  }
+
+  .ctf-prompt {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--green);
+    margin-bottom: 0.75rem;
+  }
+
+  .ctf-cursor { opacity: 1; }
+
+  .ctf-form {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .ctf-form input {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 0.5rem 0.75rem;
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    transition: border-color 0.2s;
+  }
+  .ctf-form input:focus { outline: none; border-color: var(--green); }
+
+  .ctf-form button {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .ctf-form button:hover { border-color: var(--green); color: var(--green); }
+
+  .ctf-result {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    margin-top: 0.6rem;
+    min-height: 1.2em;
+  }
+  .ctf-result.success { color: var(--green); }
+  .ctf-result.fail    { color: var(--red); }
+
+  .back-btn { margin-top: 0.5rem; }
+</style>

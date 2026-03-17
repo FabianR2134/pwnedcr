@@ -1,0 +1,330 @@
+---
+interface Props {
+  currentPage?: string;
+}
+const { currentPage = '/' } = Astro.props;
+---
+
+<!-- Announcement bar -->
+<div class="announcement-bar">
+  <p>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline;vertical-align:middle;margin-right:0.35rem"><path d="M2 9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a1 1 0 0 1 0 2v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1a1 1 0 0 1 0-2V9z"/><line x1="9" y1="7" x2="9" y2="17"/></svg>Registros PWNEDCR 0x9 ya abiertos —
+    <a href="https://app.tickettailor.com/events/pwnedcr/1848884" target="_blank" rel="noopener noreferrer">
+      ¡Es gratis!
+    </a>
+  </p>
+</div>
+
+<header class="site-header" id="site-header">
+  <nav class="nav-container container">
+    <a href="/" class="nav-logo">PWNEDCR</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/" class:list={[{ active: currentPage === '/' }]}>Inicio</a></li>
+
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-expanded="false">
+          Programa <span class="chevron">▾</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="/charlas" class:list={[{ active: currentPage === '/charlas' }]}>Charlas</a></li>
+          <li><a href="/talleres" class:list={[{ active: currentPage === '/talleres' }]}>Talleres</a></li>
+          <li>
+            <a href="https://hackertracker.app/schedule?conf=PWNEDCR0X9" target="_blank" rel="noopener noreferrer">
+              Agenda ↗
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-expanded="false">
+          Participar <span class="chevron">▾</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="https://ctf.pwnedcr.com" target="_blank" rel="noopener noreferrer">CTF ↗</a></li>
+          <li>
+            <a href="https://forms.gle/M363ojNzQpAmw2yH8" target="_blank" rel="noopener noreferrer">
+              Call for Sponsors ↗
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li><a href="/faq" class:list={[{ active: currentPage === '/faq' }]}>FAQ</a></li>
+      <li><a href="/ediciones-anteriores">Ediciones Anteriores</a></li>
+
+      <li>
+        <a
+          href="https://app.tickettailor.com/events/pwnedcr/1848884"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-registro"
+        >
+          Registro
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const header  = document.getElementById('site-header')!;
+  const toggle  = document.getElementById('nav-toggle')!;
+  const navLinks = document.getElementById('nav-links')!;
+
+  // Sticky scroll effect
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 80);
+  }, { passive: true });
+
+  // Mobile hamburger
+  toggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.classList.toggle('open', open);
+  });
+
+  // Mobile dropdowns
+  document.querySelectorAll<HTMLButtonElement>('.nav-dropdown-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (window.innerWidth > 768) return;
+      const dd = btn.closest('.nav-dropdown')!;
+      const open = dd.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!header.contains(e.target as Node)) {
+      navLinks.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+
+<style>
+  .announcement-bar {
+    background: var(--green);
+    color: #000;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.3px;
+  }
+  .announcement-bar a {
+    color: #000;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .announcement-bar a:hover { opacity: 0.7; }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(7, 7, 15, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    height: var(--nav-h);
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .site-header.scrolled {
+    background: rgba(7, 7, 15, 0.97);
+    border-bottom-color: rgba(0,255,136,0.1);
+  }
+
+  .nav-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+  .nav-logo::before { content: '> '; opacity: 0.5; }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+    margin-left: auto;
+  }
+
+  .nav-links > li { position: relative; }
+
+  .nav-links > li > a,
+  .nav-dropdown-trigger {
+    color: var(--muted);
+    font-size: 0.875rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--r);
+    transition: color 0.2s, background 0.2s;
+    white-space: nowrap;
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+  }
+
+  .nav-links > li > a:hover,
+  .nav-links > li > a.active,
+  .nav-dropdown-trigger:hover {
+    color: var(--text);
+    background: var(--surface2);
+    text-decoration: none;
+  }
+
+  .chevron {
+    font-size: 0.65rem;
+    display: inline-block;
+    transition: transform 0.2s;
+    margin-left: 2px;
+  }
+  .nav-dropdown:hover .chevron,
+  .nav-dropdown.open .chevron { transform: rotate(180deg); }
+
+  /* Dropdown */
+  .nav-dropdown { position: relative; }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    /* top: 100% sin gap + padding-top interno evita el "agujero" en hover */
+    top: 100%;
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    min-width: 190px;
+    /* padding-top actúa como el gap visual pero el área hover no se rompe */
+    padding: 6px 0.4rem 0.4rem;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    animation: dropIn 0.15s ease;
+    /* Garantiza que el sub-menú esté siempre sobre otros elementos */
+    z-index: 200;
+  }
+  @keyframes dropIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .nav-dropdown:hover .dropdown-menu { display: block; }
+  .nav-dropdown.open .dropdown-menu  { display: block; }
+
+  .dropdown-menu a {
+    display: block;
+    padding: 0.45rem 0.75rem;
+    border-radius: calc(var(--r) - 2px);
+    color: var(--muted);
+    font-size: 0.875rem;
+    transition: color 0.15s, background 0.15s;
+    text-decoration: none;
+  }
+  .dropdown-menu a:hover {
+    color: var(--text);
+    background: var(--surface2);
+  }
+
+  .btn-registro {
+    background: var(--green) !important;
+    color: #000 !important;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem !important;
+    border-radius: var(--r);
+    transition: background 0.2s !important;
+    margin-left: 0.5rem;
+  }
+  .btn-registro:hover {
+    background: #00e07a !important;
+    text-decoration: none;
+  }
+
+  /* Hamburger */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 0.5rem 0.6rem;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+  }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 768px) {
+    .nav-toggle { display: flex; }
+
+    .nav-links {
+      display: none;
+      position: fixed;
+      inset: 0;
+      top: calc(var(--nav-h) + 2rem); /* below announcement bar */
+      flex-direction: column;
+      align-items: flex-start;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      gap: 0.25rem;
+      overflow-y: auto;
+      z-index: 99;
+    }
+    .nav-links.open { display: flex; }
+
+    .nav-links > li { width: 100%; }
+
+    .nav-links > li > a,
+    .nav-dropdown-trigger {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1.05rem;
+    }
+
+    .dropdown-menu {
+      position: static;
+      box-shadow: none;
+      border: none;
+      border-left: 2px solid var(--border);
+      border-radius: 0;
+      padding: 0.25rem 0 0.25rem 1rem;
+      margin-left: 1rem;
+      background: transparent;
+      animation: none;
+    }
+    .nav-dropdown:hover .dropdown-menu { display: none; }
+    .nav-dropdown.open .dropdown-menu  { display: block; }
+
+    .btn-registro { margin-left: 0; margin-top: 0.75rem; }
+  }
+</style>
